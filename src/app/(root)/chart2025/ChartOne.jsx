@@ -9,14 +9,14 @@ const ChartOne = () => {
   }));
 
   return (
-    <div className="mt-14 py-4 h-full">
-      <h1 className="bg-gradient pb-3 text-[22px] text-white font-medium text-center px-3 pt-6">
+    <div className="mt-18 py-4 h-full bg-gradient">
+      <h1 className="pb-3 text-[22px] text-white font-medium text-center px-3 pt-6">
         A1-satta provides all kind of satta king results everyday.
       </h1>
-      <h1 className="capitalize bg-gradient2 text-3xl py-3 text-white font-semibold text-center">
-        B1 Satta Play Chart 2025
-      </h1>
-      <div className="bg-gradient h-full py-10">
+      <h2 className="capitalize text-3xl py-3 text-white font-semibold text-center">
+        T1 Satta Play Chart 2025
+      </h2>
+      <div className="bg-gradient h-full py-6">
         <div className="container mx-auto max-sm:px-3 px-4 py-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center max-md:gap-4 max-sm:gap-3 gap-5">
             {sattaLinks.map((link) => (

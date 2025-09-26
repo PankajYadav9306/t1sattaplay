@@ -28,7 +28,7 @@ export default async function Home() {
 
   // Site 1 configuration
   const siteConfig = {
-    siteName: "B1 SATTA",
+    siteName: "T1 SATTA",
     contactName: settings?.site2_contactName || settings?.contactName || "",
     whatsappNumber:
       settings?.site2_whatsappNumber || settings?.whatsappNumber || "",

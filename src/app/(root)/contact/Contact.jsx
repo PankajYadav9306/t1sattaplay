@@ -12,9 +12,9 @@ const Contact = () => {
             For any enquiry message us at{" "}
             <Link
               className="text-white font-semibold"
-              href="Contact@B1satta.In"
+              href="Contact@T1satta.In"
             >
-              Contact@B1satta.In
+              Contact@T1satta.In
             </Link>
           </p>
         </div>

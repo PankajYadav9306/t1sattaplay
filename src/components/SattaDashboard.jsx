@@ -1,4 +1,6 @@
 "use client";
+import { Link } from "lucide-react";
+import Image from "next/image";
 import GameSection from "./GameSection";
 import SattaResultTable from "./SattaResultTable";
 import { GAMES, GAME_KEYS, GAME_NAMES } from "@/utils/gameConfig";
@@ -10,8 +12,8 @@ const SattaDashboard = ({
   setting,
   monthlyResults = [],
   disawarData,
-  currentSite = "site2",
-  siteName = "B1 SATTA",
+  currentSite = "site 3",
+  siteName = "T1 Satta",
 }) => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -58,13 +60,16 @@ const SattaDashboard = ({
         {/* Current Featured Game */}
         <div className="rounded-xl text-center">
           <div className="bg-gradient px-2 pt-20 pb-8">
-            <h2 className="text-4xl lg:text-5xl text-white animate-bounce font-semibold mt-24 text-theme-accent">
-              {displaySiteName}
+            <p className="text-white pb-12 mt-12 md:mt-16 lg:mt-24 px-4 text-2xl md:text-3xl font-semibold">
+              ✨ ईमानदारी ही खाईवाल 🤝 BHAI की पहचान है, भाइयों 👑
+            </p>
+            <h2 className="text-4xl lg:text-5xl text-white font-semibold text-theme-accent">
+              {displaySiteName} 👑
             </h2>
             <p className="text-white pb-12 mt-10 px-4 text-2xl md:text-3xl font-semibold">
-              यही आती हे सबसे पहले खबर रूको और देखो
+              यही आती है सबसे पहले खबर 📰⏳
               <br />
-              SUPER FAST RESULTS
+              🚀 SUPER FAST RESULTS ⚡
             </p>
           </div>
         </div>
@@ -78,11 +83,45 @@ const SattaDashboard = ({
           todayResults={todayResults}
           yesterdayResults={yesterdayResults}
         />
+        {/* <!-- Begin: Khaiwal Bhai Section --> */}
+        <section className="bg-white py-12">
+          <div className="w-full text-center mx-auto px-6">
+            <div className="rounded-2xl shadow-2xl shadow-purple-900 bg-gradient overflow-hidden md:flex md:items-center">
+              {/* <!-- Left: Text --> */}
+              <div className="p-8 max-w-[1000px] mx-auto">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="text-sm uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
+                    🎯 No.1 खाईवाल
+                  </span>
+                  <span className="text-sm text-white/80">
+                    📍 इलाके का भरोसा
+                  </span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
+                  ✨ ईमानदारी ही खाईवाल BHAI की पहचान है।
+                </h2>
+
+                <p className="text-white/80 mb-6">
+                  खाईवाल नाम ही भरोसे और पारदर्शिता के लिए जाना जाता है।
+                  जो काम HUM करते हैं — दिल से करते हैं। यहाँ आपको जल्दी, साफ और
+                  भरोसेमंद रिज़ल्ट मिलते हैं। 🤝🔥
+                </p>
+
+                <ul className="text-white/80 space-y-2 mb-6">
+                  <li>• ✅ सीधा और फास्ट अपडेट</li>
+                  <li>• 💯 भरोसेमंद रिकॉर्ड</li>
+                  <li>• ⏱️ सुपर फास्ट रिस्पॉन्स</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Chart Grid */}
         <div>
-          <div className="bg-gradient p-6 text-center">
-            <div className="">
+          <div className=" bg-white pb-5 text-center">
+            <div className="bg-gradient p-6">
               <h2 className="sm:text-4xl text-white lg:text-5xl text-2xl font-bold text-theme-accent mb-2 md:mb-6">
                 {currentMonth} MONTH CHART
               </h2>
@@ -121,7 +160,7 @@ const SattaDashboard = ({
                     {GAMES.map((_, gameIndex) => (
                       <td
                         key={gameIndex}
-                        className="border border-theme-primary px-3 py-2 hover:bg-yellow-100 transition-colors text-center text-black text-sm"
+                        className="border border-theme-primary px-3 py-2 hover:bg-gradient-to-b hover:from-purple-500 hover:to-purple-900 transition-colors text-center text-black text-sm"
                       >
                         {row[`game${gameIndex}`]}
                       </td>

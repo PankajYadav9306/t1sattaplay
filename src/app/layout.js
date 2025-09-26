@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "B1 satta Play",
-  description: "B1 satta Play",
+  title: "T1 Satta Play",
+  description: "T1 Satta Play",
   icons: {
     icon: '/favicon.ico',
   },

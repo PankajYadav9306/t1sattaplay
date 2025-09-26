@@ -51,23 +51,23 @@ const GamePage = ({ data, setting, disawarData }) => {
           )}
         </div>
       </div>
-      <div className="bg-gradient2 p-3 text-center w-full mx-auto">
-        <p className="text-3xl font-black text-white mb-4">DISAWAR</p>
-        <div className="flex items-center gap-3 text-white justify-center max-w-[350px] mx-auto">
+      <div className="p-3 text-center w-full mx-auto">
+        <p className="text-3xl font-black text-black mb-4">DISAWAR</p>
+        <div className="flex items-center gap-3 text-black justify-center max-w-[350px] mx-auto">
           <span className="text-xl font-semibold">
             {disawarData?.yesterday || "--"}
           </span>
-          <span className="px-1 border bg-green-500 border-white rounded-md mx-2">
+          <span className="px-1 border bg-green-500 border-black rounded-md mx-2">
             ➜
           </span>
-          <span className="text-xl font-semibold">
+          <span className="text-xl text-black font-semibold">
             {disawarData?.today || (
               <Image
                 className="inline"
                 alt="wait icon"
                 width={28}
                 height={28}
-                src="https://t1satta.in/wp-content/uploads/2024/07/d.gif"
+                src="https://i.ibb.co/HffXjQCh/wait.gif"
               />
             )}
           </span>
@@ -78,26 +78,31 @@ const GamePage = ({ data, setting, disawarData }) => {
         <div className="text-center w-full">
           <div className="bg-gradient py-2.5 m-0 font-semibold">
             <p className="text-4xl max-sm:text-lg mt-2 mb-0 md:my-5 text-white max-md:text-2xl">
-              --सीधे सट्टा कंपनी का No 1 खाईवाल--
+              -- सीधे सट्टा कंपनी का No. 1 खाईवाल --
             </p>
           </div>
-          <div className="flex-1 px-2 pt-4 pb-6 text-base font-semibold leading-6 text-gray-900 min-h-1 bg-gradient">
-            <p className="uppercase mb-2 font-bold text-base lg:text-xl">
-              ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
-            </p>
-            <div className="text-start mx-auto max-w-[350px]">
-              {schedule.map((game, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center font-semibold py-0.5"
-                >
-                  <span className="flex items-center gap-1 text-nowrap">
-                    ⏰ {game.name}
-                  </span>
-                  <span>------------</span>
-                  <span className="text-nowrap">{game.time}</span>
-                </div>
-              ))}
+          <div className="flex-1 my-4 max-w-[1000px] mx-auto px-4 max-sm:px-2 pt-4 pb-6 text-base font-semibold leading-6 text-gray-900 min-h-1 bg-gradient">
+            <div className="bg-white py-3 border-black border-dashed border-[1px]">
+              <p className="uppercase mb-2 font-bold text-base lg:text-xl">
+                ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
+              </p>
+              <div className="text-start mx-auto max-w-[380px]">
+                {schedule.map((game, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between items-center font-semibold py-0.5"
+                  >
+                    <span className="flex items-center gap-1 text-nowrap">
+                      <span>🗺️</span>
+                      {game.name}
+                    </span>
+                    <span>------------</span>
+                    <span className="text-nowrap">
+                      {game.time} <span>⏰</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <p className="mt-5 text-white text-xl">💸 Payment Option 💸</p>

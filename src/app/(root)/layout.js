@@ -6,7 +6,7 @@ import Link from "next/link";
 import "../../app/globals.css";
 
 export const metadata = {
-  title: "B1 Satta Play",
+  title: "T1 Satta Play",
   description: "Satta Play - Satta Matka Results, Charts, and More",
 };
 
@@ -35,7 +35,7 @@ export default async function RootLayout({ children }) {
         <Link
           href="https://t1satta.in/"
           target="_blank"
-          className="text-[#f2295be9] font-bold hover:text-[#f2295b]"
+          className="text-purple-500 duration-200 font-bold hover:text-purple-900"
         >
           http:/t1satta.in
         </Link>{" "}

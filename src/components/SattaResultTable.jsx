@@ -28,10 +28,10 @@ const SattaResultTable = ({ todayResults = [], yesterdayResults = [] }) => {
       return (
         <div className="flex justify-center">
           <Image
-            alt="wait icon"
+            alt="wait"
             width={40}
             height={40}
-            src="https://t1satta.in/wp-content/uploads/2024/07/d.gif"
+            src="https://i.ibb.co/HffXjQCh/wait.gif"
             priority={false}
           />
         </div>
@@ -74,14 +74,14 @@ const SattaResultTable = ({ todayResults = [], yesterdayResults = [] }) => {
               {sattaGames.map((game) => (
                 <tr key={game.id}>
                   {/* Game Name Cell */}
-                  <td className="py-2 px-2 text-center text-white border border-gray-800 bg-gradient2 flex">
+                  <td className="py-2 px-2 text-center text-white border h-full border-gray-800 bg-gradient2 flex">
                     <p className="text-sm font-bold text-white w-full md:text-lg mt-1 text-center">
                       {game.displayName}{" "}
                       <span className="max-[502px]:block">{game.time}</span>
                     </p>
                   </td>
                   {/* Yesterday Result Cell */}
-                  <td className="text-center bg-white border border-gray-800 yesterday-number">
+                  <td className="text-center bg-white border !p-0 !m-0 !spacing-0 border-gray-800 yesterday-number">
                     <div className="text-2xl font-bold tracking-widest text-black">
                       {game.yesterdayResult}
                     </div>
