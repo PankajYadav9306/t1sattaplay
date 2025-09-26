@@ -373,7 +373,7 @@ const AdminDashboard = () => {
                             : formData.waitingGame,
                       })
                     }
-                    className="w-full px-4 py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200 appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-200 appearance-none cursor-pointer"
                     required
                     disabled={loading}
                   >
@@ -418,7 +418,7 @@ const AdminDashboard = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, resultNumber: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200"
                   placeholder="Enter result number (e.g., 45)"
                   required
                   disabled={loading}
@@ -437,7 +437,7 @@ const AdminDashboard = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, waitingGame: e.target.value })
                     }
-                    className="w-full px-4 py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200 appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200 appearance-none cursor-pointer"
                     required
                     disabled={loading || !formData.game}
                   >
@@ -482,7 +482,7 @@ const AdminDashboard = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, date: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200"
                   required
                   disabled={loading}
                 />
@@ -548,14 +548,14 @@ const AdminDashboard = () => {
                   results.slice(0, 10).map((item) => (
                     <div
                       key={item._id}
-                      className={`bg-white/10 rounded-lg p-4 hover:bg-white/15 transition-colors ${editingId === item._id ? "ring-2 ring-yellow-400" : ""}`}
+                      className={`bg-white/10 rounded-lg p-4 hover:bg-white/15 transition-colors ${editingId === item._id ? "ring-2 ring-purple-600" : ""}`}
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
                           <div className="flex items-center mb-2">
                             <MapPin
                               size={16}
-                              className="text-yellow-400 mr-2"
+                              className="text-purple-600 mr-2"
                             />
                             <span className="text-white font-medium">
                               {getGameTitle(item.game)}
@@ -585,14 +585,14 @@ const AdminDashboard = () => {
                         <div className="flex space-x-2 ml-4">
                           <button
                             onClick={() => handleEdit(item)}
-                            className="p-2 text-yellow-400 hover:bg-yellow-400/20 rounded-lg transition-colors"
+                            className="p-2 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
                             disabled={loading}
                           >
                             <Edit size={16} />
                           </button>
                           <button
                             onClick={() => handleDelete(item._id)}
-                            className="p-2 text-red-400 hover:bg-red-400/20 rounded-lg transition-colors"
+                            className="p-2 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
                             disabled={loading}
                           >
                             <Trash2 size={16} />
@@ -608,7 +608,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Bulk Import Section */}
-        {/* <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl p-6 mt-8">
+        <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl p-6 mt-8">
           <h2 className="roboto text-white text-xl mb-6">
             Bulk Import Historical Data
           </h2>
@@ -616,12 +616,14 @@ const AdminDashboard = () => {
           <div className="space-y-4">
             <div>
               <label className="block text-white/80 text-sm font-medium mb-2">
-                Paste JSON Data ({bulkData ? JSON.parse(bulkData || '[]').length || 0 : 0} records)
+                Paste JSON Data (
+                {bulkData ? JSON.parse(bulkData || "[]").length || 0 : 0}{" "}
+                records)
               </label>
               <textarea
                 value={bulkData}
                 onChange={(e) => setBulkData(e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200 h-32 font-mono text-sm"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200 h-32 font-mono text-sm"
                 placeholder='Paste extracted data here... [{"game": "disawar", "day": "01", "month": "JAN", "result": "45", "year": "2024"}]'
                 disabled={bulkLoading}
               />
@@ -639,13 +641,13 @@ const AdminDashboard = () => {
                     Importing...
                   </div>
                 ) : (
-                  'Import Historical Data (Fast Mode)'
+                  "Import Historical Data (Fast Mode)"
                 )}
               </button>
 
               {bulkData && (
                 <button
-                  onClick={() => setBulkData('')}
+                  onClick={() => setBulkData("")}
                   disabled={bulkLoading}
                   className="px-6 py-3 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors"
                 >
@@ -655,14 +657,17 @@ const AdminDashboard = () => {
             </div>
 
             {importStatus && (
-              <div className={`p-4 rounded-lg border ${importStatus.type === 'success'
-                ? 'bg-green-500/20 text-green-200 border-green-500/30'
-                : importStatus.type === 'progress'
-                  ? 'bg-blue-500/20 text-blue-200 border-blue-500/30'
-                  : 'bg-red-500/20 text-red-200 border-red-500/30'
-                }`}>
+              <div
+                className={`p-4 rounded-lg border ${
+                  importStatus.type === "success"
+                    ? "bg-green-500/20 text-green-200 border-green-500/30"
+                    : importStatus.type === "progress"
+                      ? "bg-blue-500/20 text-blue-200 border-blue-500/30"
+                      : "bg-red-500/20 text-red-200 border-red-500/30"
+                }`}
+              >
                 <div className="flex items-center">
-                  {importStatus.type === 'progress' && (
+                  {importStatus.type === "progress" && (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current mr-3"></div>
                   )}
                   <span>{importStatus.message}</span>
@@ -671,7 +676,9 @@ const AdminDashboard = () => {
             )}
 
             <div className="text-white/60 text-sm">
-              <p><strong>Performance Tips:</strong></p>
+              <p>
+                <strong>Performance Tips:</strong>
+              </p>
               <ul className="list-disc list-inside space-y-1 mt-2">
                 <li>Processes 10 records at once (instead of one by one)</li>
                 <li>No delay between individual records</li>
@@ -680,7 +687,7 @@ const AdminDashboard = () => {
               </ul>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
