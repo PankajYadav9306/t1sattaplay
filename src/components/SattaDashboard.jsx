@@ -86,7 +86,7 @@ const SattaDashboard = ({
         {/* <!-- Begin: Khaiwal Bhai Section --> */}
         <section className="bg-white py-8 md:py-12">
           <div className="w-full text-center mx-auto max-sm:px-4 px-6">
-            <div className="rounded-2xl shadow-2xl shadow-lime-700 bg-gradient2 overflow-hidden md:flex md:items-center">
+            <div className="rounded-2xl shadow-2xl shadow-amber-700 bg-gradient2 overflow-hidden md:flex md:items-center">
               {/* <!-- Left: Text --> */}
               <div className="p-8 max-sm:p-4 max-sm:pt-6 max-w-[1000px] mx-auto">
                 <div className="inline-flex items-center gap-3 mb-4">
@@ -160,7 +160,7 @@ const SattaDashboard = ({
                     {GAMES.map((_, gameIndex) => (
                       <td
                         key={gameIndex}
-                        className="border border-theme-primary px-3 py-2 hover:bg-gradient-to-b hover:from-[#7a3e06] hover:to-[#808a32] transition-colors text-center text-black text-sm"
+                        className="border border-theme-primary px-3 py-2 hover:bg-gradient-to-b hover:from-[#ce991b] hover:to-[#f29a1e] transition-colors text-center text-black text-sm"
                       >
                         {row[`game${gameIndex}`]}
                       </td>
