@@ -84,11 +84,11 @@ const SattaDashboard = ({
           yesterdayResults={yesterdayResults}
         />
         {/* <!-- Begin: Khaiwal Bhai Section --> */}
-        <section className="bg-white py-12">
-          <div className="w-full text-center mx-auto px-6">
-            <div className="rounded-2xl shadow-2xl shadow-purple-900 bg-gradient overflow-hidden md:flex md:items-center">
+        <section className="bg-white py-8 md:py-12">
+          <div className="w-full text-center mx-auto max-sm:px-4 px-6">
+            <div className="rounded-2xl shadow-2xl shadow-amber-700 bg-gradient2 overflow-hidden md:flex md:items-center">
               {/* <!-- Left: Text --> */}
-              <div className="p-8 max-w-[1000px] mx-auto">
+              <div className="p-8 max-sm:p-4 max-sm:pt-6 max-w-[1000px] mx-auto">
                 <div className="inline-flex items-center gap-3 mb-4">
                   <span className="text-sm uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
                     🎯 No.1 खाईवाल
@@ -103,8 +103,8 @@ const SattaDashboard = ({
                 </h2>
 
                 <p className="text-white/80 mb-6">
-                  खाईवाल नाम ही भरोसे और पारदर्शिता के लिए जाना जाता है।
-                  जो काम HUM करते हैं — दिल से करते हैं। यहाँ आपको जल्दी, साफ और
+                  खाईवाल नाम ही भरोसे और पारदर्शिता के लिए जाना जाता है। जो काम
+                  HUM करते हैं — दिल से करते हैं। यहाँ आपको जल्दी, साफ और
                   भरोसेमंद रिज़ल्ट मिलते हैं। 🤝🔥
                 </p>
 
@@ -160,7 +160,7 @@ const SattaDashboard = ({
                     {GAMES.map((_, gameIndex) => (
                       <td
                         key={gameIndex}
-                        className="border border-theme-primary px-3 py-2 hover:bg-gradient-to-b hover:from-purple-500 hover:to-purple-900 transition-colors text-center text-black text-sm"
+                        className="border border-theme-primary px-3 py-2 hover:bg-gradient-to-b hover:from-[#ce991b] hover:to-[#f29a1e] transition-colors text-center text-black text-sm"
                       >
                         {row[`game${gameIndex}`]}
                       </td>

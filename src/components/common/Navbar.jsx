@@ -41,7 +41,7 @@ const Navbar = () => {
       {/* Scroll Progress */}
       <div className="fixed top-0 left-0 w-full h-1 z-50">
         <div
-          className="h-1 bg-gradient transition-all duration-150"
+          className="h-1 bg-gradient bg-gradient-to-r transition-all duration-150"
           style={{ width: `${scrollProgress}%` }}
         ></div>
       </div>
@@ -58,7 +58,7 @@ const Navbar = () => {
               <Link
                 href={link.href}
                 key={link.id}
-                className="bg-gradient-to-b to-[#d04ed6] from-[#834d9b] text-center hover:-translate-y-1 flex items-center justify-center px-2 sm:px-5 md:px-6 py-2 sm:py-3 rounded cursor-pointer transition"
+                className="bg-gradient2 text-center hover:-translate-y-1 flex items-center justify-center px-2 sm:px-5 md:px-6 py-2 sm:py-3 rounded cursor-pointer transition"
               >
                 <p className="text-base max-sm:text-sm m-0 font-bold text-white">
                   {link.title}
