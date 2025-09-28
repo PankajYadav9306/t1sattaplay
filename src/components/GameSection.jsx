@@ -76,7 +76,7 @@ const GamePage = ({ data, setting, disawarData }) => {
       {/* === BOTTOM STATIC SECTION === */}
       <section className="flex flex-col md:flex-row md:space-x-1 bg-white">
         <div className="text-center w-full">
-          <div className="bg-gradient2 py-2.5 m-0 font-semibold">
+          <div className="bg-gradient py-2.5 m-0 font-semibold">
             <p className="text-4xl max-sm:text-lg mt-2 mb-0 md:my-5 text-white max-md:text-2xl">
               -- सीधे सट्टा कंपनी का No. 1 खाईवाल --
             </p>

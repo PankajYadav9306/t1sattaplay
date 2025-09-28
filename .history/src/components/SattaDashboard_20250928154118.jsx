@@ -160,7 +160,7 @@ const SattaDashboard = ({
                     {GAMES.map((_, gameIndex) => (
                       <td
                         key={gameIndex}
-                        className="border border-theme-primary px-3 py-2 hover:bg-[#fcb511] transition-colors text-center text-black text-sm"
+                        className="border border-theme-primary px-3 py-2 hover:bg-gradient-to-b hover:from-[#ce991b] transition-colors text-center text-black text-sm"
                       >
                         {row[`game${gameIndex}`]}
                       </td>
