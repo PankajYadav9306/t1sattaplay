@@ -45,7 +45,7 @@ const GamePage = ({ data, setting, disawarData }) => {
                 alt="wait icon"
                 width={40}
                 height={40}
-                src="https://i.ibb.co/HffXjQCh/wait.gif"
+                src="https://t1satta.in/wp-content/uploads/2024/07/d.gif"
               />
             </>
           )}
