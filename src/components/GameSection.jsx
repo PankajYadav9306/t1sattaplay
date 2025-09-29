@@ -14,7 +14,7 @@ const GamePage = ({ data, setting, disawarData }) => {
     { name: "GAZIYABAD ", time: "09:00 PM", number: "90" },
     { name: "MATHURA", time: "10:00 PM", number: "75" },
     { name: "GALI ", time: "11:30 PM", number: "41" },
-    { name: "DISAWAR ", time: "04:30 AM", number: "11" },
+    { name: "DISAWAR ", time: "04:50 PM", number: "11" },
   ];
 
   return (
