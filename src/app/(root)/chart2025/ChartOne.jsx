@@ -11,7 +11,7 @@ const ChartOne = () => {
   return (
     <div className="mt-18 py-4 h-full bg-gradient">
       <h1 className="pb-3 text-[22px] text-white font-medium text-center px-3 pt-6">
-        A1-satta provides all kind of satta king results everyday.
+        T1-satta provides all kind of satta king results everyday.
       </h1>
       <h2 className="capitalize text-3xl py-3 text-white font-semibold text-center">
         T1 Satta Play Chart 2025
