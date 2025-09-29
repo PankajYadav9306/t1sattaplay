@@ -9,10 +9,6 @@ import {
   Calendar,
   MapPin,
   Settings,
-  Search,
-  ChevronLeft,
-  ChevronRight,
-  X,
 } from "lucide-react";
 import {
   getAllResultsWithMeta,
@@ -54,17 +50,6 @@ const AdminDashboard = () => {
   const [bulkLoading, setBulkLoading] = useState(false);
   const [importStatus, setImportStatus] = useState(null);
 
-  // Search and filter states
-  const [searchDate, setSearchDate] = useState("");
-  const [searchGame, setSearchGame] = useState("");
-  const [searchResultNumber, setSearchResultNumber] = useState("");
-  const [filteredResults, setFilteredResults] = useState([]);
-  const [showCurrentMonthOnly, setShowCurrentMonthOnly] = useState(true);
-
-  // Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const [resultsPerPage, setResultsPerPage] = useState(10);
-
   const router = useRouter();
 
   // Filter waiting game options (exclude currently selected game)
@@ -103,72 +88,14 @@ const AdminDashboard = () => {
     loadResults();
   }, [router]);
 
-  // Helper function to get current month's date range
-  const getCurrentMonthRange = () => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    
-    const formatDate = (date) => {
-      const y = date.getFullYear();
-      const m = String(date.getMonth() + 1).padStart(2, '0');
-      const d = String(date.getDate()).padStart(2, '0');
-      return `${y}-${m}-${d}`;
-    };
-    
-    return {
-      start: formatDate(firstDay),
-      end: formatDate(lastDay)
-    };
-  };
-
-  // Filter results based on search criteria
-  useEffect(() => {
-    let filtered = [...results];
-    
-    // Apply current month filter if enabled and no date search
-    if (showCurrentMonthOnly && !searchDate) {
-      const { start, end } = getCurrentMonthRange();
-      filtered = filtered.filter(item => item.date >= start && item.date <= end);
-    }
-    
-    if (searchDate) {
-      filtered = filtered.filter(item => item.date === searchDate);
-    }
-    
-    if (searchGame) {
-      filtered = filtered.filter(item => item.game === searchGame);
-    }
-    
-    if (searchResultNumber) {
-      filtered = filtered.filter(item => 
-        item.resultNumber.toString().includes(searchResultNumber)
-      );
-    }
-    
-    setFilteredResults(filtered);
-    setCurrentPage(1); // Reset to first page when filters change
-  }, [results, searchDate, searchGame, searchResultNumber, showCurrentMonthOnly]);
-
-  // Calculate pagination
-  const indexOfLastResult = currentPage * resultsPerPage;
-  const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-  const currentResults = filteredResults.slice(indexOfFirstResult, indexOfLastResult);
-  const totalPages = Math.ceil(filteredResults.length / resultsPerPage);
-
   const loadResults = async () => {
     try {
       setFetchLoading(true);
       const data = await getAllResultsWithMeta();
       setResults(data);
-      setFilteredResults(data);
     } catch (error) {
       console.error("Failed to load results:", error);
       setResults([]);
-      setFilteredResults([]);
     } finally {
       setFetchLoading(false);
     }
@@ -189,21 +116,7 @@ const AdminDashboard = () => {
       if (editingId) {
         await updateResult(editingId, formData);
       } else {
-        // Check if a result already exists for this game and date
-        const existingResult = results.find(
-          (item) => item.game === formData.game && item.date === formData.date
-        );
-        
-        if (existingResult) {
-          if (confirm(`A result already exists for ${getGameTitle(formData.game)} on ${formData.date}. Do you want to update it?`)) {
-            await updateResult(existingResult._id, formData);
-          } else {
-            setLoading(false);
-            return;
-          }
-        } else {
-          await createResult(formData);
-        }
+        await createResult(formData);
       }
 
       await loadResults();
@@ -216,9 +129,6 @@ const AdminDashboard = () => {
         date: getISTDateForForm(),
       });
       setEditingId(null);
-      
-      // Clear search filters to show the new/updated result
-      clearAllFilters();
     } catch (error) {
       console.error("Error saving result:", error);
       alert("Failed to save result. Please try again.");
@@ -235,9 +145,6 @@ const AdminDashboard = () => {
       date: item.date,
     });
     setEditingId(item._id);
-    
-    // Scroll to top to see the form
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDelete = async (id) => {
@@ -270,33 +177,6 @@ const AdminDashboard = () => {
       waitingGame: "",
       date: getISTDateForForm(),
     });
-  };
-
-  const clearAllFilters = () => {
-    setSearchDate("");
-    setSearchGame("");
-    setSearchResultNumber("");
-    setShowCurrentMonthOnly(false);
-    setCurrentPage(1);
-  };
-
-  const hasActiveFilters = searchDate || searchGame || searchResultNumber || showCurrentMonthOnly;
-
-  // Pagination handlers
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
   };
 
   const handleBulkImport = async () => {
@@ -645,104 +525,9 @@ const AdminDashboard = () => {
             </form>
           </div>
 
-          {/* Results List with Search */}
+          {/* Results List */}
           <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="roboto text-white text-xl">
-                Results ({filteredResults.length} total)
-              </h2>
-              {hasActiveFilters && (
-                <button
-                  onClick={clearAllFilters}
-                  className="text-white/60 hover:text-white text-sm flex items-center"
-                >
-                  <X size={16} className="mr-1" />
-                  Clear Filters
-                </button>
-              )}
-            </div>
-
-            {/* Search Filters */}
-            <div className="space-y-3 mb-4">
-              {/* Current Month Toggle */}
-              <div className="flex items-center justify-between p-3 bg-purple-600/20 rounded-lg border border-purple-600/30">
-                <label className="text-white/90 text-sm font-medium">
-                  Show current month only
-                </label>
-                <button
-                  onClick={() => setShowCurrentMonthOnly(!showCurrentMonthOnly)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    showCurrentMonthOnly ? 'bg-purple-600' : 'bg-white/20'
-                  }`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      showCurrentMonthOnly ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <input
-                  type="date"
-                  value={searchDate}
-                  onChange={(e) => {
-                    setSearchDate(e.target.value);
-                    if (e.target.value) {
-                      setShowCurrentMonthOnly(false);
-                    }
-                  }}
-                  className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600"
-                  placeholder="Search by date"
-                />
-                <select
-                  value={searchGame}
-                  onChange={(e) => setSearchGame(e.target.value)}
-                  className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
-                >
-                  <option value="" className="text-black bg-white">All Games</option>
-                  {GAME_OPTIONS.map((game) => (
-                    <option key={game.value} value={game.value} className="text-black bg-white">
-                      {game.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={searchResultNumber}
-                  onChange={(e) => setSearchResultNumber(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600"
-                  placeholder="Search by result number..."
-                />
-                <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" />
-              </div>
-              
-              {/* Results per page selector */}
-              <div className="flex justify-between items-center">
-                <span className="text-white/60 text-sm">
-                  {showCurrentMonthOnly && !searchDate ? (
-                    <span className="text-purple-400">Current month: </span>
-                  ) : null}
-                  Showing {filteredResults.length > 0 ? indexOfFirstResult + 1 : 0}-{Math.min(indexOfLastResult, filteredResults.length)} of {filteredResults.length}
-                </span>
-                <select
-                  value={resultsPerPage}
-                  onChange={(e) => {
-                    setResultsPerPage(Number(e.target.value));
-                    setCurrentPage(1);
-                  }}
-                  className="px-3 py-1 bg-white/10 border border-white/20 rounded text-white text-sm"
-                >
-                  <option value="5" className="text-black">5 per page</option>
-                  <option value="10" className="text-black">10 per page</option>
-                  <option value="20" className="text-black">20 per page</option>
-                  <option value="50" className="text-black">50 per page</option>
-                </select>
-              </div>
-            </div>
+            <h2 className="roboto text-white text-xl mb-6">Recent Results</h2>
 
             {fetchLoading ? (
               <div className="text-center text-white/60 py-8">
@@ -750,143 +535,157 @@ const AdminDashboard = () => {
                 <p>Loading results...</p>
               </div>
             ) : (
-              <>
-                <div className="space-y-3 max-h-96 p-1 overflow-y-auto">
-                  {currentResults.length === 0 ? (
-                    <div className="text-center text-white/60 py-8">
-                      {hasActiveFilters ? (
-                        <>
-                          <Search size={48} className="mx-auto mb-4 opacity-50" />
-                          <p>No results found matching your filters</p>
-                          <button
-                            onClick={clearAllFilters}
-                            className="text-purple-400 hover:text-purple-300 text-sm mt-2"
-                          >
-                            Clear all filters
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <Calendar size={48} className="mx-auto mb-4 opacity-50" />
-                          <p>No results added yet</p>
-                          <p className="text-sm mt-2">
-                            Add your first result using the form
-                          </p>
-                        </>
-                      )}
-                    </div>
-                  ) : (
-                    currentResults.map((item) => (
-                      <div
-                        key={item._id}
-                        className={`bg-white/10 rounded-lg p-4 hover:bg-white/15 transition-colors ${editingId === item._id ? "ring-2 ring-purple-600" : ""}`}
-                      >
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <div className="flex items-center mb-2">
-                              <MapPin
-                                size={16}
-                                className="text-purple-600 mr-2"
-                              />
-                              <span className="text-white font-medium">
-                                {getGameTitle(item.game)}
-                              </span>
-                              <span className="ml-2 px-3 py-1 bg-gradient text-white text-sm font-bold rounded-full">
-                                {item.resultNumber}
-                              </span>
-                            </div>
-                            {item.waitingGame && (
-                              <div className="text-white/70 text-sm mb-2">
-                                Waiting:{" "}
-                                <span className="text-white/90">
-                                  {getGameTitle(item.waitingGame)}
-                                </span>
-                              </div>
-                            )}
-                            <div className="flex items-center">
-                              <Calendar
-                                size={14}
-                                className="text-white/50 mr-1"
-                              />
-                              <span className="text-white/60 text-sm">
-                                {item.date}
-                              </span>
-                            </div>
+              <div className="space-y-3 max-h-96 p-1 overflow-y-auto">
+                {results.length === 0 ? (
+                  <div className="text-center text-white/60 py-8">
+                    <Calendar size={48} className="mx-auto mb-4 opacity-50" />
+                    <p>No results added yet</p>
+                    <p className="text-sm mt-2">
+                      Add your first result using the form
+                    </p>
+                  </div>
+                ) : (
+                  results.slice(0, 10).map((item) => (
+                    <div
+                      key={item._id}
+                      className={`bg-white/10 rounded-lg p-4 hover:bg-white/15 transition-colors ${editingId === item._id ? "ring-2 ring-purple-600" : ""}`}
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <div className="flex items-center mb-2">
+                            <MapPin
+                              size={16}
+                              className="text-purple-600 mr-2"
+                            />
+                            <span className="text-white font-medium">
+                              {getGameTitle(item.game)}
+                            </span>
+                            <span className="ml-2 px-3 py-1 bg-gradient text-white text-sm font-bold rounded-full">
+                              {item.resultNumber}
+                            </span>
                           </div>
-                          <div className="flex space-x-2 ml-4">
-                            <button
-                              onClick={() => handleEdit(item)}
-                              className="p-2 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
-                              disabled={loading}
-                            >
-                              <Edit size={16} />
-                            </button>
-                            <button
-                              onClick={() => handleDelete(item._id)}
-                              className="p-2 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
-                              disabled={loading}
-                            >
-                              <Trash2 size={16} />
-                            </button>
+                          {item.waitingGame && (
+                            <div className="text-white/70 text-sm mb-2">
+                              Waiting:{" "}
+                              <span className="text-white/90">
+                                {getGameTitle(item.waitingGame)}
+                              </span>
+                            </div>
+                          )}
+                          <div className="flex items-center">
+                            <Calendar
+                              size={14}
+                              className="text-white/50 mr-1"
+                            />
+                            <span className="text-white/60 text-sm">
+                              {item.date}
+                            </span>
                           </div>
                         </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-
-                {/* Pagination Controls */}
-                {totalPages > 1 && (
-                  <div className="flex justify-center items-center mt-4 space-x-2">
-                    <button
-                      onClick={handlePreviousPage}
-                      disabled={currentPage === 1}
-                      className="p-2 bg-white/10 text-white rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      <ChevronLeft size={18} />
-                    </button>
-                    
-                    {/* Page numbers */}
-                    <div className="flex space-x-1">
-                      {[...Array(Math.min(5, totalPages))].map((_, index) => {
-                        let pageNumber;
-                        if (totalPages <= 5) {
-                          pageNumber = index + 1;
-                        } else if (currentPage <= 3) {
-                          pageNumber = index + 1;
-                        } else if (currentPage >= totalPages - 2) {
-                          pageNumber = totalPages - 4 + index;
-                        } else {
-                          pageNumber = currentPage - 2 + index;
-                        }
-                        
-                        return (
+                        <div className="flex space-x-2 ml-4">
                           <button
-                            key={index}
-                            onClick={() => handlePageChange(pageNumber)}
-                            className={`px-3 py-1 rounded-lg transition-colors ${
-                              currentPage === pageNumber
-                                ? "bg-purple-600 text-white"
-                                : "bg-white/10 text-white hover:bg-white/20"
-                            }`}
+                            onClick={() => handleEdit(item)}
+                            className="p-2 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
+                            disabled={loading}
                           >
-                            {pageNumber}
+                            <Edit size={16} />
                           </button>
-                        );
-                      })}
+                          <button
+                            onClick={() => handleDelete(item._id)}
+                            className="p-2 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
+                            disabled={loading}
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <button
-                      onClick={handleNextPage}
-                      disabled={currentPage === totalPages}
-                      className="p-2 bg-white/10 text-white rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      <ChevronRight size={18} />
-                    </button>
-                  </div>
+                  ))
                 )}
-              </>
+              </div>
             )}
+          </div>
+        </div>
+
+        {/* Bulk Import Section */}
+        <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl p-6 mt-8">
+          <h2 className="roboto text-white text-xl mb-6">
+            Bulk Import Historical Data
+          </h2>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                Paste JSON Data (
+                {bulkData ? JSON.parse(bulkData || "[]").length || 0 : 0}{" "}
+                records)
+              </label>
+              <textarea
+                value={bulkData}
+                onChange={(e) => setBulkData(e.target.value)}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200 h-32 font-mono text-sm"
+                placeholder='Paste extracted data here... [{"game": "disawar", "day": "01", "month": "JAN", "result": "45", "year": "2024"}]'
+                disabled={bulkLoading}
+              />
+            </div>
+
+            <div className="flex space-x-4">
+              <button
+                onClick={handleBulkImport}
+                disabled={bulkLoading || !bulkData.trim()}
+                className="flex-1 bg-gradient2 text-white py-3 px-4 rounded-lg roboto hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {bulkLoading ? (
+                  <div className="flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    Importing...
+                  </div>
+                ) : (
+                  "Import Historical Data (Fast Mode)"
+                )}
+              </button>
+
+              {bulkData && (
+                <button
+                  onClick={() => setBulkData("")}
+                  disabled={bulkLoading}
+                  className="px-6 py-3 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {importStatus && (
+              <div
+                className={`p-4 rounded-lg border ${
+                  importStatus.type === "success"
+                    ? "bg-green-500/20 text-green-200 border-green-500/30"
+                    : importStatus.type === "progress"
+                      ? "bg-blue-500/20 text-blue-200 border-blue-500/30"
+                      : "bg-red-500/20 text-red-200 border-red-500/30"
+                }`}
+              >
+                <div className="flex items-center">
+                  {importStatus.type === "progress" && (
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current mr-3"></div>
+                  )}
+                  <span>{importStatus.message}</span>
+                </div>
+              </div>
+            )}
+
+            <div className="text-white/60 text-sm">
+              <p>
+                <strong>Performance Tips:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 mt-2">
+                <li>Processes 10 records at once (instead of one by one)</li>
+                <li>No delay between individual records</li>
+                <li>Should import 366 records in ~30-60 seconds</li>
+                <li>Automatically skips duplicates</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
