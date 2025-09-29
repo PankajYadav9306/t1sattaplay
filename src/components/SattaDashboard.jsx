@@ -1,4 +1,5 @@
 "use client";
+import { Typewriter } from "react-simple-typewriter";
 import { Link } from "lucide-react";
 import Image from "next/image";
 import GameSection from "./GameSection";
@@ -60,10 +61,16 @@ const SattaDashboard = ({
         {/* Current Featured Game */}
         <div className="rounded-xl text-center">
           <div className="bg-gradient px-2 pt-20 pb-8">
-            <p className="text-white pb-12 mt-12 md:mt-16 lg:mt-24 px-4 text-2xl md:text-3xl font-semibold">
-              ✨ ईमानदारी ही खाईवाल 🤝 BHAI की पहचान है, भाइयों 👑
+            <p className="text-white pb-8 mt-12 md:mt-16 lg:mt-24 px-4 text-2xl md:text-3xl font-semibold">
+              <Typewriter
+                words={["✨ ईमानदारी ही खाईवाल BHAI की पहचान है। 😎"]}
+                cursor
+                cursorBlinking={false}
+                cursorStyle=""
+                typeSpeed={80}
+              />
             </p>
-            <h2 className="text-4xl lg:text-5xl text-white font-semibold text-theme-accent">
+            <h2 className="text-4xl animate-pulse lg:text-5xl text-white font-semibold text-theme-accent">
               {displaySiteName} 👑
             </h2>
             <p className="text-white pb-12 mt-10 px-4 text-2xl md:text-3xl font-semibold">
