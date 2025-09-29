@@ -5,15 +5,15 @@ import DateTime from "./DateTime";
 
 const GamePage = ({ data, setting, disawarData }) => {
   const schedule = [
-    { name: "IPL", time: "12:50 PM", number: "45" },
-    { name: "SIKANDERPUR", time: "01:55 PM", number: "62" },
-    { name: "DELHI BAZAR", time: "02:50 PM", number: "27" },
-    { name: "SHRI GANESH", time: "04:25 PM", number: "84" },
+    { name: "SHIRDI DHAM", time: "12:55 PM", number: "45" },
+    { name: "KALIYAR", time: "01:55 PM", number: "62" },
+    { name: "DELHI BAZAR", time: "03:00 PM", number: "27" },
+    { name: "SHRI GANESH", time: "04:30 PM", number: "84" },
     { name: "FARIDABAD ", time: "05:45 PM", number: "11" },
-    { name: "SURYA ", time: "07:20 PM", number: "32" },
-    { name: "GAZIYABAD ", time: "09:20 PM", number: "90" },
-    { name: "VARANASI", time: "10:20 PM", number: "75" },
-    { name: "GALI ", time: "11:20 PM", number: "41" },
+    { name: "SHAKTI PEETH", time: "07:25 PM", number: "32" },
+    { name: "GAZIYABAD ", time: "09:00 PM", number: "90" },
+    { name: "MATHURA", time: "10:00 PM", number: "75" },
+    { name: "GALI ", time: "11:30 PM", number: "41" },
     { name: "DISAWAR ", time: "04:30 AM", number: "11" },
   ];
 
@@ -84,7 +84,7 @@ const GamePage = ({ data, setting, disawarData }) => {
           <div className="flex-1 my-4 max-w-[1000px] mx-auto px-4 max-sm:px-2 pt-4 pb-6 text-base font-semibold leading-6 text-gray-900 min-h-1 bg-gradient">
             <div className="bg-white py-3 border-black border-dashed border-[1px]">
               <p className="uppercase mb-2 font-bold text-base lg:text-xl">
-                ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
+                ♕♕ &nbsp;TEJU BHAI KHAIWAL &nbsp;♕♕
               </p>
               <div className="text-start mx-auto max-w-[380px]">
                 {schedule.map((game, index) => (
@@ -122,7 +122,7 @@ const GamePage = ({ data, setting, disawarData }) => {
               हरूफ रेट 100-----{setting?.rate}
             </p>
             <p className="uppercase text-white">
-              ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
+              ♕♕ &nbsp;TEJU BHAI KHAIWAL &nbsp;♕♕
             </p>
             <p className="text-white">
                 Game play करने के लिये नीचे लिंक पर क्लिक करे
