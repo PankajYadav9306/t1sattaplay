@@ -125,9 +125,7 @@ const GamePage = ({ data, setting, disawarData }) => {
               ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
             </p>
             <p className="text-white">
-              <Link target="_blank" href="https://wa.me/+919034460384">
                 Game play करने के लिये नीचे लिंक पर क्लिक करे
-              </Link>
             </p>
             <div className="mx-auto max-w-[300px] mt-4 hover:scale-110 transition-all duration-300">
               <Link

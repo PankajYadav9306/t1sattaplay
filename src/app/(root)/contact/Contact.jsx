@@ -8,7 +8,7 @@ const Contact = ({ setting }) => {
   return (
     <div className="mx-auto mt-24">
       <div className="flex flex-col justify-center items-center bg-gray-100">
-        <h1 className="text-3xl mt-5 font-bold text-gray-800">
+        <h1 className="text-3xl max-sm:text-xl text-center px-4 mt-5 font-bold text-gray-800">
           <Typewriter
             words={["✨ ईमानदारी ही खाईवाल BHAI की पहचान है। 😎"]}
             cursor
@@ -22,7 +22,7 @@ const Contact = ({ setting }) => {
             T1 Satta 👑
           </h2>
         </div>
-        <div className="mx-auto max-w-[300px] mt-4 hover:scale-110 transition-all duration-300">
+        <div className="mx-auto max-w-[300px] mt-5 hover:scale-110 transition-all duration-300">
           <Link
             target="_blank"
             href={`https://wa.me/+${setting?.whatsappNumber}`}
@@ -35,6 +35,11 @@ const Contact = ({ setting }) => {
               alt="whatsapp"
             />
           </Link>
+        </div>
+        <div className="mt-5 bg-gradient font-semibold text-2xl max-sm:text-xl py-4 text-center px-3 w-full text-white">
+          <span>
+            @{new Date().getFullYear()} T1 Satta :: All Rights Reserved
+          </span>
         </div>
       </div>
     </div>
