@@ -56,7 +56,7 @@ const SattaResultTable = ({ todayResults = [], yesterdayResults = [] }) => {
         <div className="relative p-0 overflow-x-auto">
           <table className="w-full text-sm text-left text-gray-500 border-collapse border-gray-400">
             {/* Table Header */}
-            <thead className="text-base text-white bg-gradient2">
+            <thead className="text-base text-red-800 bg-gradient2">
               <tr>
                 <th className="text-center border border-gray-800 py-3 w-[37%]">
                   सट्टा का नाम
