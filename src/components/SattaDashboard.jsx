@@ -1,10 +1,8 @@
 "use client";
+import { GAMES } from "@/utils/gameConfig";
 import { Typewriter } from "react-simple-typewriter";
-import { Link } from "lucide-react";
-import Image from "next/image";
 import GameSection from "./GameSection";
 import SattaResultTable from "./SattaResultTable";
-import { GAMES, GAME_KEYS, GAME_NAMES } from "@/utils/gameConfig";
 
 const SattaDashboard = ({
   todayResults = [],
@@ -70,8 +68,8 @@ const SattaDashboard = ({
                 typeSpeed={80}
               />
             </p>
-            <h2 className="text-4xl animate-pulse lg:text-5xl text-white font-semibold text-theme-accent">
-              {displaySiteName} 👑
+            <h2 className="text-4xl lg:text-5xl text-white font-semibold text-theme-accent">
+             👑 {displaySiteName} 👑
             </h2>
             <p className="text-white pb-12 mt-10 px-4 text-2xl md:text-3xl font-semibold">
               यही आती है सबसे पहले खबर 📰⏳
