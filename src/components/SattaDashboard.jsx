@@ -69,7 +69,7 @@ const SattaDashboard = ({
               />
             </p>
             <h2 className="text-4xl lg:text-5xl text-white font-semibold text-theme-accent">
-             👑 {displaySiteName} 👑
+              👑 {displaySiteName} 👑
             </h2>
             <p className="text-white pb-12 mt-10 px-4 text-2xl md:text-3xl font-semibold">
               यही आती है सबसे पहले खबर 📰⏳
@@ -90,8 +90,8 @@ const SattaDashboard = ({
         />
         {/* <!-- Begin: Khaiwal Bhai Section --> */}
         <section className="bg-white py-8 md:py-12">
-          <div className="w-full text-center mx-auto max-sm:px-4 px-6">
-            <div className="rounded-2xl shadow-2xl shadow-amber-700 bg-gradient2 overflow-hidden md:flex md:items-center">
+          <div className="w-full text-center mx-auto max-sm:px-0 px-6">
+            <div className="rounded-2xl max-sm:rounded-none shadow-2xl shadow-amber-700 bg-gradient2 overflow-hidden md:flex md:items-center">
               {/* <!-- Left: Text --> */}
               <div className="p-8 max-sm:p-4 max-sm:pt-6 max-w-[1000px] mx-auto">
                 <div className="inline-flex items-center gap-3 mb-4">
@@ -140,13 +140,13 @@ const SattaDashboard = ({
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gradient2">
-                  <th className="outline px-3 py-2 text-white text-sm sticky left-0 bg-gradient2 z-10">
+                  <th className="outline outline-white px-3 py-2 text-red-800 text-sm sticky left-0 bg-gradient2 z-10">
                     S.No
                   </th>
                   {GAMES.map((game, index) => (
                     <th
                       key={index}
-                      className="border border-theme-primary px-3 py-2 text-white text-xs"
+                      className="border border-theme-primary px-3 py-2 text-red-800 border-white text-xs"
                     >
                       {game.name}
                     </th>

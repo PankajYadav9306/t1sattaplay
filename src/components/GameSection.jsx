@@ -90,13 +90,13 @@ const GamePage = ({ data, setting, disawarData }) => {
                 {schedule.map((game, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center font-semibold py-0.5"
+                    className="flex justify-between max-sm:text-lg text-xl items-center font-semibold py-0.5"
                   >
                     <span className="flex items-center gap-1 text-nowrap">
                       <span>🗺️</span>
                       {game.name}
                     </span>
-                    <span>------------</span>
+                    <span>←——→</span>
                     <span className="text-nowrap">
                       {game.time} <span>⏰</span>
                     </span>
@@ -125,7 +125,7 @@ const GamePage = ({ data, setting, disawarData }) => {
               ♕♕ &nbsp;TEJU BHAI KHAIWAL &nbsp;♕♕
             </p>
             <p className="text-white">
-                Game play करने के लिये नीचे लिंक पर क्लिक करे
+              Game play करने के लिये नीचे लिंक पर क्लिक करे
             </p>
             <div className="mx-auto max-w-[300px] mt-4 hover:scale-110 transition-all duration-300">
               <Link
