@@ -60,9 +60,7 @@ export async function updateSettings(settings) {
 
 // ==================== RESULTS QUERIES ====================
 export async function getTodayResult() {
-  const today = getISTDate(); // Use IST date
-  console.log('Fetching results for:', today); // Debug log
-  
+  const today = getISTDate(); // Use IST date  
   const query = `*[_type == "result" && date == $today]{
     game,
     date,
@@ -79,7 +77,6 @@ export async function getTodayResult() {
 
 export async function getYesterdayResults() {
   const yDate = getISTDate(-1); // Yesterday in IST
-  console.log('Fetching yesterday results for:', yDate);
   
   const query = `*[_type == "result" && date == $yDate]{
     game,
@@ -116,9 +113,7 @@ export async function getLastResult() {
 export async function getDisawarData() {
   const today = getISTDate();
   const yDate = getISTDate(-1);
-  
-  console.log('Fetching Disawar data for:', { today, yDate }); // Debug
-  
+    
   const query = `{
     "today": *[_type == "result" && game == "disawar" && date == $today][0].resultNumber,
     "yesterday": *[_type == "result" && game == "disawar" && date == $yDate][0].resultNumber
@@ -126,7 +121,6 @@ export async function getDisawarData() {
 
   try {
     const result = await client.fetch(query, { today, yDate }, { cache: 'no-store' });
-    console.log('Disawar result:', result); // Debug
     return result;
   } catch (error) {
     console.error("Error fetching Disawar data:", error);

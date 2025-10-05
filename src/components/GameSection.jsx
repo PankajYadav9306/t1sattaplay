@@ -86,17 +86,17 @@ const GamePage = ({ data, setting, disawarData }) => {
               <p className="uppercase mb-2 font-bold text-base lg:text-xl">
                 ♕♕ &nbsp;TEJU BHAI KHAIWAL &nbsp;♕♕
               </p>
-              <div className="text-start mx-auto max-w-[380px]">
+              <div className="text-start mx-auto max-w-[400px]">
                 {schedule.map((game, index) => (
                   <div
                     key={index}
-                    className="flex justify-between max-sm:text-lg text-xl items-center font-semibold py-0.5"
+                    className="flex justify-between sm:text-lg items-center font-semibold py-0.5"
                   >
-                    <span className="flex items-center gap-1 text-nowrap">
+                    <span className="flex items-center gap-1 text-nowrap max-w-[150px] w-full">
                       <span>🗺️</span>
                       {game.name}
                     </span>
-                    <span>←——→</span>
+                    <span>←┈┈┈→</span>
                     <span className="text-nowrap">
                       {game.time} <span>⏰</span>
                     </span>

@@ -108,17 +108,17 @@ const AdminDashboard = () => {
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth();
-    
+
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
-    
+
     const formatDate = (date) => {
       const y = date.getFullYear();
       const m = String(date.getMonth() + 1).padStart(2, '0');
       const d = String(date.getDate()).padStart(2, '0');
       return `${y}-${m}-${d}`;
     };
-    
+
     return {
       start: formatDate(firstDay),
       end: formatDate(lastDay)
@@ -128,27 +128,27 @@ const AdminDashboard = () => {
   // Filter results based on search criteria
   useEffect(() => {
     let filtered = [...results];
-    
+
     // Apply current month filter if enabled and no date search
     if (showCurrentMonthOnly && !searchDate) {
       const { start, end } = getCurrentMonthRange();
       filtered = filtered.filter(item => item.date >= start && item.date <= end);
     }
-    
+
     if (searchDate) {
       filtered = filtered.filter(item => item.date === searchDate);
     }
-    
+
     if (searchGame) {
       filtered = filtered.filter(item => item.game === searchGame);
     }
-    
+
     if (searchResultNumber) {
-      filtered = filtered.filter(item => 
+      filtered = filtered.filter(item =>
         item.resultNumber.toString().includes(searchResultNumber)
       );
     }
-    
+
     setFilteredResults(filtered);
     setCurrentPage(1); // Reset to first page when filters change
   }, [results, searchDate, searchGame, searchResultNumber, showCurrentMonthOnly]);
@@ -193,7 +193,7 @@ const AdminDashboard = () => {
         const existingResult = results.find(
           (item) => item.game === formData.game && item.date === formData.date
         );
-        
+
         if (existingResult) {
           if (confirm(`A result already exists for ${getGameTitle(formData.game)} on ${formData.date}. Do you want to update it?`)) {
             await updateResult(existingResult._id, formData);
@@ -216,7 +216,7 @@ const AdminDashboard = () => {
         date: getISTDateForForm(),
       });
       setEditingId(null);
-      
+
       // Clear search filters to show the new/updated result
       clearAllFilters();
     } catch (error) {
@@ -235,7 +235,7 @@ const AdminDashboard = () => {
       date: item.date,
     });
     setEditingId(item._id);
-    
+
     // Scroll to top to see the form
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -370,10 +370,6 @@ const AdminDashboard = () => {
           else if (result.status === "skipped") skipped++;
           else if (result.status === "error") errors++;
         });
-
-        console.log(
-          `Batch ${batchIndex + 1}/${totalBatches} completed - Imported: ${imported}, Skipped: ${skipped}, Errors: ${errors}`
-        );
 
         if (batchIndex < totalBatches - 1) {
           await new Promise((resolve) => setTimeout(resolve, 200));
@@ -671,18 +667,16 @@ const AdminDashboard = () => {
                 </label>
                 <button
                   onClick={() => setShowCurrentMonthOnly(!showCurrentMonthOnly)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    showCurrentMonthOnly ? 'bg-purple-600' : 'bg-white/20'
-                  }`}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showCurrentMonthOnly ? 'bg-purple-600' : 'bg-white/20'
+                    }`}
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      showCurrentMonthOnly ? 'translate-x-6' : 'translate-x-1'
-                    }`}
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showCurrentMonthOnly ? 'translate-x-6' : 'translate-x-1'
+                      }`}
                   />
                 </button>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-3">
                 <input
                   type="date"
@@ -719,7 +713,7 @@ const AdminDashboard = () => {
                 />
                 <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" />
               </div>
-              
+
               {/* Results per page selector */}
               <div className="flex justify-between items-center flex-wrap gap-1">
                 <span className="text-white/60 text-sm">
@@ -845,7 +839,7 @@ const AdminDashboard = () => {
                     >
                       <ChevronLeft size={18} />
                     </button>
-                    
+
                     {/* Page numbers */}
                     <div className="flex space-x-1">
                       {[...Array(Math.min(5, totalPages))].map((_, index) => {
@@ -859,23 +853,22 @@ const AdminDashboard = () => {
                         } else {
                           pageNumber = currentPage - 2 + index;
                         }
-                        
+
                         return (
                           <button
                             key={index}
                             onClick={() => handlePageChange(pageNumber)}
-                            className={`px-3 py-1 rounded-lg transition-colors ${
-                              currentPage === pageNumber
-                                ? "bg-purple-600 text-white"
-                                : "bg-white/10 text-white hover:bg-white/20"
-                            }`}
+                            className={`px-3 py-1 rounded-lg transition-colors ${currentPage === pageNumber
+                              ? "bg-purple-600 text-white"
+                              : "bg-white/10 text-white hover:bg-white/20"
+                              }`}
                           >
                             {pageNumber}
                           </button>
                         );
                       })}
                     </div>
-                    
+
                     <button
                       onClick={handleNextPage}
                       disabled={currentPage === totalPages}
@@ -890,6 +883,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
