@@ -11,7 +11,6 @@ const SattaDashboard = ({
   setting,
   monthlyResults = [],
   disawarData,
-  currentSite = "site 3",
   siteName = "T1 Satta",
 }) => {
   const currentDate = new Date();

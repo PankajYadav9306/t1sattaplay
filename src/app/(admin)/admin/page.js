@@ -399,7 +399,7 @@ const AdminDashboard = () => {
     const availableGames = GAMES.filter((game) => game.key !== currentGame);
     return (
       availableGames[Math.floor(Math.random() * availableGames.length)]?.key ||
-      "disawar"
+      "disawer"
     );
   };
 
@@ -438,7 +438,7 @@ const AdminDashboard = () => {
             <div className="flex items-center sm:space-x-4">
               <button
                 onClick={() => setShowConfig(true)}
-                className="flex items-center max-sm:text-sm text-white/80 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="flex items-center max-sm:text-sm text-white/80 hover:text-white px-3 truncate py-2 rounded-lg hover:bg-white/10 transition-colors"
               >
                 <Settings size={18} className="mr-2" />
                 Site Config

@@ -4,11 +4,11 @@ import { GAMES } from "@/utils/gameConfig";
 // ==================== SETTINGS ====================
 export async function getSettings() {
   const query = `*[_type == "settings"][0]{
-    site2_name,
-    site2_contactName,
-    site2_whatsappNumber,
-    site2_paymentNumber,
-    site2_rate,
+    site1_name,
+    site1_contactName,
+    site1_whatsappNumber,
+    site1_paymentNumber,
+    site1_rate,
     contactName,
     whatsappNumber
   }`;
@@ -66,7 +66,7 @@ export async function getTodayResult() {
     date,
     resultNumber
   }`;
-  
+
   try {
     return await client.fetch(query, { today }, { cache: 'no-store' });
   } catch (error) {
@@ -77,13 +77,13 @@ export async function getTodayResult() {
 
 export async function getYesterdayResults() {
   const yDate = getISTDate(-1); // Yesterday in IST
-  
+
   const query = `*[_type == "result" && date == $yDate]{
     game,
     date,
     resultNumber
   }`;
-  
+
   try {
     return await client.fetch(query, { yDate }, { cache: 'no-store' });
   } catch (error) {
@@ -113,17 +113,17 @@ export async function getLastResult() {
 export async function getDisawarData() {
   const today = getISTDate();
   const yDate = getISTDate(-1);
-    
+
   const query = `{
-    "today": *[_type == "result" && game == "disawar" && date == $today][0].resultNumber,
-    "yesterday": *[_type == "result" && game == "disawar" && date == $yDate][0].resultNumber
+    "today": *[_type == "result" && game == "disawer" && date == $today][0].resultNumber,
+    "yesterday": *[_type == "result" && game == "disawer" && date == $yDate][0].resultNumber
   }`;
 
   try {
     const result = await client.fetch(query, { today, yDate }, { cache: 'no-store' });
     return result;
   } catch (error) {
-    console.error("Error fetching Disawar data:", error);
+    console.error("Error fetching Disawer data:", error);
     return { today: null, yesterday: null };
   }
 }
@@ -271,9 +271,9 @@ export function validateResultData(data) {
 export const gameSlugMapping = {};
 GAMES.forEach(game => {
   // 2024 versions
-  gameSlugMapping[`${game.key.replace('_', '-')}-yearly-chart-2024`] = game.key;
+  gameSlugMapping[`${game.key}-yearly-chart-2024`] = game.key;
   // 2025 versions
-  gameSlugMapping[`${game.key.replace('_', '-')}-yearly-chart-2025`] = game.key;
+  gameSlugMapping[`${game.key}-yearly-chart-2025`] = game.key;
 });
 
 // Dynamic parse slug data function
@@ -282,12 +282,12 @@ export function parseSlugData(slug) {
 
   GAMES.forEach(game => {
     // 2024 versions
-    gameDisplayNames[`${game.key.replace('_', '-')}-yearly-chart-2024`] = {
+    gameDisplayNames[`${game.key}-yearly-chart-2024`] = {
       name: game.name,
       year: "2024"
     };
     // 2025 versions
-    gameDisplayNames[`${game.key.replace('_', '-')}-yearly-chart-2025`] = {
+    gameDisplayNames[`${game.key}-yearly-chart-2025`] = {
       name: game.name,
       year: "2025"
     };

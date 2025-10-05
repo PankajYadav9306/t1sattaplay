@@ -5,7 +5,7 @@ const ChartOne = () => {
   const sattaLinks = GAMES.map((game) => ({
     id: game.order,
     title: `${game.name} YEARLY CHART 2025`,
-    href: `${game.key.replace("_", "-")}-yearly-chart-2025`,
+    href: `${game.key}-yearly-chart-2025`,
   }));
 
   return (

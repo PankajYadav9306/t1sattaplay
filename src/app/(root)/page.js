@@ -29,11 +29,11 @@ export default async function Home() {
   // Site 1 configuration
   const siteConfig = {
     siteName: "T1 SATTA",
-    contactName: settings?.site2_contactName || settings?.contactName || "",
+    contactName: settings?.site1_contactName || settings?.contactName || "",
     whatsappNumber:
-      settings?.site2_whatsappNumber || settings?.whatsappNumber || "",
-    paymentNumber: settings?.site2_paymentNumber || "",
-    rate: settings?.site2_rate || "",
+      settings?.site1_whatsappNumber || settings?.whatsappNumber || "",
+    paymentNumber: settings?.site1_paymentNumber || "",
+    rate: settings?.site1_rate || "",
   };
 
   return (

@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
       <Link
         className="fixed bottom-6 right-6"
         target="_blank"
-        href={`https://wa.me/+${setting?.site2_whatsappNumber}`}
+        href={`https://wa.me/+${setting?.site1_whatsappNumber}`}
       >
         <Image
           className="max-sm:!size-14"

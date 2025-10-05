@@ -1,13 +1,13 @@
 
 export const GAMES = [
   {
-    key: "disawar",
-    name: "DISAWAR",
+    key: "disawer",
+    name: "DISAWER",
     time: "05:20 AM",
     order: 10,
   },
   {
-    key: "shirdi_dham",
+    key: "shirdi-dham",
     name: "SHIRDI DHAM",
     time: "01:00 PM",
     order: 1,
@@ -19,13 +19,13 @@ export const GAMES = [
     order: 2,
   },
   {
-    key: "delhi_bazar",
+    key: "delhi-bazar",
     name: "DELHI BAZAR",
     time: "03:00 PM",
     order: 3,
   },
   {
-    key: "shri_ganesh",
+    key: "shri-ganesh",
     name: "SHRI GANESH",
     time: "04:40 PM",
     order: 4,
@@ -37,14 +37,14 @@ export const GAMES = [
     order: 5,
   },
   {
-    key: "shakti_peeth",
+    key: "shakti-peeth",
     name: "SHAKTI PEETH",
     time: "07:30 PM",
     order: 6,
   },
   {
-    key: "ghaziabad",
-    name: "GHAZIABAD",
+    key: "gaziyabad",
+    name: "GAZIYABAD",
     time: "09:30 PM",
     order: 7,
   },
