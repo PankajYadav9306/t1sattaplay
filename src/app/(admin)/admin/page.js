@@ -371,6 +371,10 @@ const AdminDashboard = () => {
           else if (result.status === "error") errors++;
         });
 
+        console.log(
+          `Batch ${batchIndex + 1}/${totalBatches} completed - Imported: ${imported}, Skipped: ${skipped}, Errors: ${errors}`
+        );
+
         if (batchIndex < totalBatches - 1) {
           await new Promise((resolve) => setTimeout(resolve, 200));
         }
@@ -399,7 +403,7 @@ const AdminDashboard = () => {
     const availableGames = GAMES.filter((game) => game.key !== currentGame);
     return (
       availableGames[Math.floor(Math.random() * availableGames.length)]?.key ||
-      "disawer"
+      "disawar"
     );
   };
 
@@ -438,7 +442,7 @@ const AdminDashboard = () => {
             <div className="flex items-center sm:space-x-4">
               <button
                 onClick={() => setShowConfig(true)}
-                className="flex items-center max-sm:text-sm text-white/80 hover:text-white px-3 truncate py-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="flex items-center max-sm:text-sm text-white/80 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
               >
                 <Settings size={18} className="mr-2" />
                 Site Config
@@ -859,8 +863,8 @@ const AdminDashboard = () => {
                             key={index}
                             onClick={() => handlePageChange(pageNumber)}
                             className={`px-3 py-1 rounded-lg transition-colors ${currentPage === pageNumber
-                              ? "bg-purple-600 text-white"
-                              : "bg-white/10 text-white hover:bg-white/20"
+                                ? "bg-purple-600 text-white"
+                                : "bg-white/10 text-white hover:bg-white/20"
                               }`}
                           >
                             {pageNumber}
@@ -883,7 +887,6 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
