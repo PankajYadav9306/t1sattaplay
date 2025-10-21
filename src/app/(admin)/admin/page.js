@@ -421,20 +421,20 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white/10 backdrop-blur-lg border-b border-white/20">
+      <header className="bg-black/10 backdrop-blur-lg border-b border-black/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <div className="bg-gradient w-10 h-10 rounded-lg flex items-center justify-center mr-2">
-                <div className="text-white font-bold">A</div>
+              <div className="bg-gradient2 w-10 h-10 rounded-lg flex items-center justify-center mr-2">
+                <div className="text-black font-bold">A</div>
               </div>
               <div>
-                <h1 className="roboto text-white text-base sm:text-xl">
+                <h1 className="roboto text-black text-base sm:text-xl">
                   Admin Panel
                 </h1>
-                <p className="text-white/60 max-sm:text-xs text-sm">
+                <p className="text-black/60 max-sm:text-xs text-sm">
                   Welcome back, {user.username}
                 </p>
               </div>
@@ -442,14 +442,14 @@ const AdminDashboard = () => {
             <div className="flex items-center sm:space-x-4">
               <button
                 onClick={() => setShowConfig(true)}
-                className="flex items-center max-sm:text-sm text-white/80 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="flex items-center max-sm:text-sm text-black/80 hover:text-black px-4 py-2 rounded-lg hover:bg-black/10 transition-colors"
               >
                 <Settings size={18} className="mr-2" />
                 Site Config
               </button>
               <button
                 onClick={logout}
-                className="flex items-center text-white/80 hover:text-white max-sm:px-1 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="flex items-center text-black/80 hover:text-black max-sm:px-1 px-4 py-2 rounded-lg hover:bg-black/10 transition-colors"
               >
                 <LogOut size={18} className="mr-2" />
                 <span className="max-sm:hidden">Logout</span>
@@ -469,15 +469,15 @@ const AdminDashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Add/Edit Form */}
-          <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl sm:p-6 p-4">
-            <h2 className="roboto text-white text-xl mb-6 flex items-center">
+          <div className="bg-black/10 backdrop-blur-lg border border-black/10 rounded-2xl sm:p-6 p-4">
+            <h2 className="roboto text-black text-xl mb-6 flex items-center">
               <Plus size={20} className="mr-2" />
               {editingId ? "Edit Result" : "Add New Result"}
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
+                <label className="block text-black/80 text-sm font-medium mb-2">
                   Game *
                 </label>
                 <div className="relative">
@@ -493,7 +493,7 @@ const AdminDashboard = () => {
                             : formData.waitingGame,
                       })
                     }
-                    className="w-full px-4 py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-200 appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 pr-10 bg-black/10 border border-black/20 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-200 appearance-none cursor-pointer"
                     required
                     disabled={loading}
                   >
@@ -512,7 +512,7 @@ const AdminDashboard = () => {
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg
-                      className="w-5 h-5 text-white/60"
+                      className="w-5 h-5 text-black/60"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -529,7 +529,7 @@ const AdminDashboard = () => {
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
+                <label className="block text-black/80 text-sm font-medium mb-2">
                   Result Number *
                 </label>
                 <input
@@ -538,7 +538,7 @@ const AdminDashboard = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, resultNumber: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200"
+                  className="w-full px-4 py-3 bg-black/5 border border-black/20 rounded-lg text-black placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-orange-600 transition-all duration-200"
                   placeholder="Enter result number (e.g., 45)"
                   required
                   disabled={loading}
@@ -548,7 +548,7 @@ const AdminDashboard = () => {
               </div>
 
               <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
+                <label className="block text-black/80 text-sm font-medium mb-2">
                   Waiting Game *
                 </label>
                 <div className="relative">
@@ -557,7 +557,7 @@ const AdminDashboard = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, waitingGame: e.target.value })
                     }
-                    className="w-full px-4 py-3 pr-10 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200 appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 pr-10 bg-black/5 border border-black/20 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-orange-600 transition-all duration-200 appearance-none cursor-pointer"
                     required
                     disabled={loading || !formData.game}
                   >
@@ -576,7 +576,7 @@ const AdminDashboard = () => {
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg
-                      className="w-5 h-5 text-white/60"
+                      className="w-5 h-5 text-black/60"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -592,8 +592,8 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-white/80 text-sm font-medium mb-2">
+              <div className="w-full">
+                <label className="block text-black/80 text-sm font-medium mb-2">
                   Date *
                 </label>
                 <input
@@ -602,7 +602,7 @@ const AdminDashboard = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, date: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all duration-200"
+                  className="w-full px-4 py-3 bg-[#CECECE] border border-black/20 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-orange-600 transition-all duration-200"
                   required
                   disabled={loading}
                 />
@@ -618,7 +618,7 @@ const AdminDashboard = () => {
                     !formData.waitingGame ||
                     !formData.date
                   }
-                  className="flex-1 bg-gradient text-white py-3 px-4 rounded-lg roboto hover:opacity-90 transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:transform-none disabled:cursor-not-allowed"
+                  className="flex-1 bg-gradient2 text-black py-3 px-4 rounded-lg roboto hover:opacity-90 transform hover:scale-105 transition-all duration-200 disabled:opacity-80 disabled:transform-none disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <div className="flex items-center justify-center">
@@ -635,7 +635,7 @@ const AdminDashboard = () => {
                   <button
                     type="button"
                     onClick={cancelEdit}
-                    className="px-6 py-3 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-colors"
+                    className="px-6 py-3 bg-black/20 text-black rounded-lg hover:bg-black/30 transition-colors"
                     disabled={loading}
                   >
                     Cancel
@@ -646,15 +646,15 @@ const AdminDashboard = () => {
           </div>
 
           {/* Results List with Search */}
-          <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-2xl p-6">
+          <div className="bg-black/10 backdrop-blur-lg border border-black/20 rounded-2xl p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="roboto text-white text-xl">
+              <h2 className="roboto text-black text-xl">
                 Results ({filteredResults.length} total)
               </h2>
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="text-white/60 hover:text-white text-sm flex items-center"
+                  className="text-black/60 hover:text-black text-sm flex items-center"
                 >
                   <X size={16} className="mr-1" />
                   Clear Filters
@@ -665,13 +665,13 @@ const AdminDashboard = () => {
             {/* Search Filters */}
             <div className="space-y-3 mb-4">
               {/* Current Month Toggle */}
-              <div className="flex items-center justify-between p-3 bg-purple-600/20 rounded-lg border border-purple-600/30">
-                <label className="text-white/90 text-sm font-medium">
+              <div className="flex items-center justify-between p-3 bg-orange-600/20 rounded-lg border border-orange-600/30">
+                <label className="text-black/90 text-sm font-medium">
                   Show current month only
                 </label>
                 <button
                   onClick={() => setShowCurrentMonthOnly(!showCurrentMonthOnly)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showCurrentMonthOnly ? 'bg-purple-600' : 'bg-white/20'
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showCurrentMonthOnly ? 'bg-orange-600' : 'bg-black/20'
                     }`}
                 >
                   <span
@@ -691,13 +691,13 @@ const AdminDashboard = () => {
                       setShowCurrentMonthOnly(false);
                     }
                   }}
-                  className="px-3 py-2 bg-white/10 w-full border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="px-3 py-2 bg-[#CECECE] w-full border border-black/20 rounded-lg text-black placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-orange-600"
                   placeholder="Search by date"
                 />
                 <select
                   value={searchGame}
                   onChange={(e) => setSearchGame(e.target.value)}
-                  className="px-3 py-2 bg-white/10 w-full border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="px-3 py-2 bg-black/10 w-full border border-black/20 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-orange-600"
                 >
                   <option value="" className="text-black bg-white">All Games</option>
                   {GAME_OPTIONS.map((game) => (
@@ -712,17 +712,17 @@ const AdminDashboard = () => {
                   type="text"
                   value={searchResultNumber}
                   onChange={(e) => setSearchResultNumber(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full pl-10 pr-4 py-2 bg-black/10 border border-black/20 rounded-lg text-black placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-orange-600"
                   placeholder="Search by result number..."
                 />
-                <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" />
+                <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black/50" />
               </div>
 
               {/* Results per page selector */}
               <div className="flex justify-between items-center flex-wrap gap-1">
-                <span className="text-white/60 text-sm">
+                <span className="text-black/60 text-sm">
                   {showCurrentMonthOnly && !searchDate ? (
-                    <span className="text-purple-400">Current month: </span>
+                    <span className="text-orange-400">Current month: </span>
                   ) : null}
                   Showing {filteredResults.length > 0 ? indexOfFirstResult + 1 : 0}-{Math.min(indexOfLastResult, filteredResults.length)} of {filteredResults.length}
                 </span>
@@ -732,7 +732,7 @@ const AdminDashboard = () => {
                     setResultsPerPage(Number(e.target.value));
                     setCurrentPage(1);
                   }}
-                  className="px-3 py-1 bg-white/10 border border-white/20 rounded text-white text-sm"
+                  className="px-3 py-1 bg-black/10 border border-black/20 rounded text-black text-sm"
                 >
                   <option value="5" className="text-black">5 per page</option>
                   <option value="10" className="text-black">10 per page</option>
@@ -743,7 +743,7 @@ const AdminDashboard = () => {
             </div>
 
             {fetchLoading ? (
-              <div className="text-center text-white/60 py-8">
+              <div className="text-center text-black/60 py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-4"></div>
                 <p>Loading results...</p>
               </div>
@@ -751,14 +751,14 @@ const AdminDashboard = () => {
               <>
                 <div className="space-y-3 max-h-96 overflow-y-auto">
                   {currentResults.length === 0 ? (
-                    <div className="text-center text-white/60 py-8">
+                    <div className="text-center text-black/60 py-8">
                       {hasActiveFilters ? (
                         <>
                           <Search size={48} className="mx-auto mb-4 opacity-50" />
                           <p>No results found matching your filters</p>
                           <button
                             onClick={clearAllFilters}
-                            className="text-purple-400 hover:text-purple-300 text-sm mt-2"
+                            className="text-orange-400 hover:text-orange-300 text-sm mt-2"
                           >
                             Clear all filters
                           </button>
@@ -777,26 +777,26 @@ const AdminDashboard = () => {
                     currentResults.map((item) => (
                       <div
                         key={item._id}
-                        className={`bg-white/10 rounded-lg p-3 hover:bg-white/15 transition-colors ${editingId === item._id ? "ring-2 ring-purple-600" : ""}`}
+                        className={`bg-black/10 rounded-lg p-3 hover:bg-black/15 transition-colors ${editingId === item._id ? "ring-2 ring-orange-600" : ""}`}
                       >
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
                             <div className="flex items-center mb-2">
                               <MapPin
                                 size={16}
-                                className="text-purple-600 mr-2"
+                                className="text-orange-600 mr-2"
                               />
-                              <span className="text-white font-medium text-sm sm:text-base">
+                              <span className="text-black font-medium text-sm sm:text-base">
                                 {getGameTitle(item.game)}
                               </span>
-                              <span className="ml-2 px-2 py-1 bg-gradient text-white text-sm font-bold rounded-full">
+                              <span className="ml-2 px-2 py-1 bg-gradient text-black text-sm font-bold rounded-full">
                                 {item.resultNumber}
                               </span>
                             </div>
                             {item.waitingGame && (
-                              <div className="text-white/70 text-sm mb-2">
+                              <div className="text-black/70 text-sm mb-2">
                                 Waiting:{" "}
-                                <span className="text-white/90">
+                                <span className="text-black/90">
                                   {getGameTitle(item.waitingGame)}
                                 </span>
                               </div>
@@ -804,9 +804,9 @@ const AdminDashboard = () => {
                             <div className="flex items-center">
                               <Calendar
                                 size={14}
-                                className="text-white/50 mr-1"
+                                className="text-black/50 mr-1"
                               />
-                              <span className="text-white/60 text-sm">
+                              <span className="text-black/60 text-sm">
                                 {item.date}
                               </span>
                             </div>
@@ -814,14 +814,14 @@ const AdminDashboard = () => {
                           <div className="flex space-x-1 ml-2">
                             <button
                               onClick={() => handleEdit(item)}
-                              className="p-1.5 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
+                              className="p-1.5 text-orange-600 hover:bg-orange-800/20 rounded-lg transition-colors"
                               disabled={loading}
                             >
                               <Edit size={16} />
                             </button>
                             <button
                               onClick={() => handleDelete(item._id)}
-                              className="p-1.5 text-purple-600 hover:bg-purple-800/20 rounded-lg transition-colors"
+                              className="p-1.5 text-orange-600 hover:bg-orange-800/20 rounded-lg transition-colors"
                               disabled={loading}
                             >
                               <Trash2 size={16} />
@@ -839,7 +839,7 @@ const AdminDashboard = () => {
                     <button
                       onClick={handlePreviousPage}
                       disabled={currentPage === 1}
-                      className="p-2 bg-white/10 text-white rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="p-2 bg-black/10 text-black rounded-lg hover:bg-black/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       <ChevronLeft size={18} />
                     </button>
@@ -863,8 +863,8 @@ const AdminDashboard = () => {
                             key={index}
                             onClick={() => handlePageChange(pageNumber)}
                             className={`px-3 py-1 rounded-lg transition-colors ${currentPage === pageNumber
-                                ? "bg-purple-600 text-white"
-                                : "bg-white/10 text-white hover:bg-white/20"
+                              ? "bg-orange-600 text-black"
+                              : "bg-black/10 text-black hover:bg-black/20"
                               }`}
                           >
                             {pageNumber}
@@ -876,7 +876,7 @@ const AdminDashboard = () => {
                     <button
                       onClick={handleNextPage}
                       disabled={currentPage === totalPages}
-                      className="p-2 bg-white/10 text-white rounded-lg hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="p-2 bg-black/10 text-black rounded-lg hover:bg-black/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       <ChevronRight size={18} />
                     </button>
