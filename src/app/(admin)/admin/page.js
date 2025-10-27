@@ -749,7 +749,7 @@ const AdminDashboard = () => {
               </div>
             ) : (
               <>
-                <div className="space-y-3 max-h-96 overflow-y-auto">
+                <div className="space-y-3 max-h-96 overflow-y-auto p-1">
                   {currentResults.length === 0 ? (
                     <div className="text-center text-black/60 py-8">
                       {hasActiveFilters ? (
