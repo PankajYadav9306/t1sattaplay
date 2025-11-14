@@ -48,11 +48,10 @@ const Navbar = () => {
 
       {/* Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full bg-gradient shadow-lg z-40 transition-transform duration-500 ${
-          showNavbar ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`fixed top-0 left-0 w-full bg-gradient shadow-lg z-40 transition-transform duration-500 ${showNavbar ? "translate-y-0" : "-translate-y-full"
+          }`}
       >
-        <div className="container max-w-[1240px] mx-auto px-3 sm:px-4 py-5">
+        <div className="mx-auto px-4 sm:px-6 py-5">
           <div className="grid grid-cols-3 sm:gap-3 gap-2">
             {sattaLinks.map((link) => (
               <Link

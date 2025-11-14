@@ -24,7 +24,7 @@
 }
 
 ::-webkit-scrollbar {
-  @apply w-1;
+  @apply w-0;
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-gradient-to-b to-[#ff9900] from-[#50590a];

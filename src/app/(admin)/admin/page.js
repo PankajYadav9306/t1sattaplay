@@ -1,28 +1,28 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import SiteConfig from "@/components/SiteConfig";
 import {
-  Plus,
-  Edit,
-  Trash2,
-  LogOut,
-  Calendar,
-  MapPin,
-  Settings,
-  Search,
-  ChevronLeft,
-  ChevronRight,
-  X,
-} from "lucide-react";
-import {
-  getAllResultsWithMeta,
   createResult,
-  updateResult,
   deleteResult,
+  getAllResultsWithMeta,
+  updateResult,
   validateResultData,
 } from "@/services/result";
-import SiteConfig from "@/components/SiteConfig";
-import { GAMES, GAME_OPTIONS } from "@/utils/gameConfig";
+import { GAME_OPTIONS } from "@/utils/gameConfig";
+import {
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Edit,
+  LogOut,
+  MapPin,
+  Plus,
+  Search,
+  Settings,
+  Trash2,
+  X,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 function getISTDateForForm() {
   const date = new Date();
@@ -49,11 +49,6 @@ const AdminDashboard = () => {
   // Site Configuration State
   const [showConfig, setShowConfig] = useState(false);
 
-  // Bulk import states
-  const [bulkData, setBulkData] = useState("");
-  const [bulkLoading, setBulkLoading] = useState(false);
-  const [importStatus, setImportStatus] = useState(null);
-
   // Search and filter states
   const [searchDate, setSearchDate] = useState("");
   const [searchGame, setSearchGame] = useState("");
@@ -71,21 +66,6 @@ const AdminDashboard = () => {
   const waitingGameOptions = GAME_OPTIONS.filter(
     (game) => game.value !== formData.game
   );
-
-  const monthMapping = {
-    JAN: "01",
-    FEB: "02",
-    MAR: "03",
-    APR: "04",
-    MAY: "05",
-    JUN: "06",
-    JUL: "07",
-    AUG: "08",
-    SEP: "09",
-    OCT: "10",
-    NOV: "11",
-    DEC: "12",
-  };
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -297,114 +277,6 @@ const AdminDashboard = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
-  };
-
-  const handleBulkImport = async () => {
-    setBulkLoading(true);
-    setImportStatus(null);
-
-    try {
-      const data = JSON.parse(bulkData);
-
-      if (!Array.isArray(data)) {
-        throw new Error("Data must be an array");
-      }
-
-      let imported = 0;
-      let skipped = 0;
-      let errors = 0;
-
-      const batchSize = 10;
-      const totalBatches = Math.ceil(data.length / batchSize);
-
-      for (let batchIndex = 0; batchIndex < totalBatches; batchIndex++) {
-        const batch = data.slice(
-          batchIndex * batchSize,
-          (batchIndex + 1) * batchSize
-        );
-
-        setImportStatus({
-          type: "progress",
-          message: `Processing batch ${batchIndex + 1} of ${totalBatches} (${Math.round((batchIndex / totalBatches) * 100)}%)`,
-        });
-
-        const batchPromises = batch.map(async (item) => {
-          try {
-            const monthNum = monthMapping[item.month.toUpperCase()];
-            if (!monthNum) {
-              return {
-                status: "error",
-                reason: `Invalid month: ${item.month}`,
-              };
-            }
-
-            const date = `${item.year}-${monthNum}-${String(item.day).padStart(2, "0")}`;
-
-            await createResult({
-              game: item.city || item.game,
-              resultNumber: item.result,
-              date: date,
-              waitingGame: getRandomWaitingGame(item.city || item.game),
-            });
-
-            return {
-              status: "success",
-              data: `${item.city || item.game} ${date}`,
-            };
-          } catch (error) {
-            if (
-              error.message.includes("already exists") ||
-              error.message.includes("unique")
-            ) {
-              return { status: "skipped", reason: "Already exists" };
-            } else {
-              return { status: "error", reason: error.message };
-            }
-          }
-        });
-
-        const batchResults = await Promise.all(batchPromises);
-
-        batchResults.forEach((result) => {
-          if (result.status === "success") imported++;
-          else if (result.status === "skipped") skipped++;
-          else if (result.status === "error") errors++;
-        });
-
-        console.log(
-          `Batch ${batchIndex + 1}/${totalBatches} completed - Imported: ${imported}, Skipped: ${skipped}, Errors: ${errors}`
-        );
-
-        if (batchIndex < totalBatches - 1) {
-          await new Promise((resolve) => setTimeout(resolve, 200));
-        }
-      }
-
-      await loadResults();
-
-      setImportStatus({
-        type: "success",
-        message: `Import completed! Imported: ${imported}, Skipped: ${skipped}, Errors: ${errors} out of ${data.length} total records`,
-      });
-
-      setBulkData("");
-    } catch (error) {
-      console.error("Bulk import error:", error);
-      setImportStatus({
-        type: "error",
-        message: `Import failed: ${error.message}`,
-      });
-    } finally {
-      setBulkLoading(false);
-    }
-  };
-
-  const getRandomWaitingGame = (currentGame) => {
-    const availableGames = GAMES.filter((game) => game.key !== currentGame);
-    return (
-      availableGames[Math.floor(Math.random() * availableGames.length)]?.key ||
-      "disawar"
-    );
   };
 
   // Callback when site config is saved
@@ -691,7 +563,7 @@ const AdminDashboard = () => {
                       setShowCurrentMonthOnly(false);
                     }
                   }}
-                  className="px-3 py-2 bg-[#CECECE] w-full border border-black/20 rounded-lg text-black placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-orange-600"
+                  className="px-3 py-2 bg-[#CECECE] w-full max-sm:max-w-[170px] border border-black/20 rounded-lg text-black placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-orange-600"
                   placeholder="Search by date"
                 />
                 <select

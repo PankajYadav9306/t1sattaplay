@@ -43,7 +43,7 @@ const SattaResultTable = ({ todayResults = [], yesterdayResults = [] }) => {
         className="flex justify-center"
         style={{ marginBottom: 0, letterSpacing: "2px", fontSize: "22px" }}
       >
-        <span className="text-2xl font-bold tracking-widest text-black">
+        <span className="text-lg lg:text-xl font-bold tracking-widest text-black">
           {result}
         </span>
       </div>
@@ -74,8 +74,8 @@ const SattaResultTable = ({ todayResults = [], yesterdayResults = [] }) => {
               {sattaGames.map((game) => (
                 <tr key={game.id}>
                   {/* Game Name Cell */}
-                  <td className="py-2 px-2 text-center text-white border h-full border-gray-800 bg-gradient2 flex">
-                    <p className="text-sm font-bold text-white w-full md:text-lg mt-1 text-center">
+                  <td className="py-2 px-2 text-center font-bold text-white border h-full border-gray-800 bg-gradient2">
+                    <p className="text-base text-white w-full lg:text-xl mt-1 text-center">
                       {game.displayName}{" "}
                       <span className="max-[502px]:block">{game.time}</span>
                     </p>

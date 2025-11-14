@@ -68,7 +68,7 @@ const SattaDashboard = ({
               />
             </p>
             <h2 className="text-4xl lg:text-5xl text-white font-semibold text-theme-accent">
-              👑 {displaySiteName} 👑
+              {displaySiteName}
             </h2>
             <p className="text-white pb-12 mt-10 px-4 text-2xl md:text-3xl font-semibold">
               यही आती है सबसे पहले खबर 📰⏳
@@ -126,12 +126,9 @@ const SattaDashboard = ({
         <div>
           <div className=" bg-white pb-5 text-center">
             <div className="bg-gradient p-6">
-              <h2 className="sm:text-4xl text-white lg:text-5xl text-2xl font-bold text-theme-accent mb-2 md:mb-6">
-                {currentMonth} MONTH CHART
+              <h2 className="sm:text-4xl text-white lg:text-5xl text-xl font-bold text-theme-accent mb-2 md:mb-6">
+                {currentMonth} MONTH CHART {currentYear}
               </h2>
-              <p className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold">
-                {currentYear}
-              </p>
             </div>
           </div>
 

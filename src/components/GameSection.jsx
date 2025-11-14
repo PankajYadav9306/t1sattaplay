@@ -16,6 +16,7 @@ const GamePage = ({ data, setting, disawarData }) => {
     { name: "GALI ", time: "11:30 PM", number: "41" },
     { name: "DISAWER ", time: "04:50 PM", number: "11" },
   ];
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -52,14 +53,18 @@ const GamePage = ({ data, setting, disawarData }) => {
         </div>
       </div>
       <div className="p-3 text-center w-full mx-auto">
-        <p className="text-3xl font-black text-black mb-4">DISAWAR</p>
+        <Link href={`/disawer-yearly-chart-${currentYear}`} className="text-3xl font-bold text-black mb-4">DISAWAR</Link>
         <div className="flex items-center gap-3 text-black justify-center max-w-[350px] mx-auto">
           <span className="text-xl font-semibold">
             {disawarData?.yesterday || "--"}
           </span>
-          <span className="px-1 border bg-green-500 border-black rounded-md mx-2">
-            ➜
-          </span>
+          <Image
+            className="mx-4"
+            src="https://cdn.prod.website-files.com/67a6672d42bf0f0674721094/67a68eca12044dd0fb8bdf06_arrow.gif"
+            alt="Arrow"
+            width={20}
+            height={20}
+          />
           <span className="text-xl text-black font-semibold">
             {disawarData?.today || (
               <Image
@@ -96,7 +101,13 @@ const GamePage = ({ data, setting, disawarData }) => {
                       <span>🗺️</span>
                       {game.name}
                     </span>
-                    <span>←┈┈┈→</span>
+                    <Image
+                      className="max-w-[60px] sm:max-w-[100px] w-full"
+                      src="https://cdn.prod.website-files.com/67a6672d42bf0f0674721094/67a9da533c0090c26d77ef6b_Vector.svg"
+                      alt="Example image"
+                      width={100}
+                      height={20}
+                    />
                     <span className="text-nowrap">
                       {game.time} <span>⏰</span>
                     </span>
@@ -124,7 +135,7 @@ const GamePage = ({ data, setting, disawarData }) => {
             <p className="uppercase text-white">
               ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
             </p>
-            <p className="text-white">
+            <p className="text-white max-sm:text-base">
               Game play करने के लिये नीचे लिंक पर क्लिक करे
             </p>
             <div className="mx-auto max-w-[300px] mt-4 hover:scale-110 transition-all duration-300">
