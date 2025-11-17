@@ -41,7 +41,7 @@ const SattaResultTable = ({ todayResults = [], yesterdayResults = [] }) => {
     return (
       <div
         className="flex justify-center"
-        style={{ marginBottom: 0, letterSpacing: "2px", fontSize: "22px" }}
+        style={{ marginBottom: 0, letterSpacing: "2px" }}
       >
         <span className="text-lg lg:text-xl font-bold tracking-widest text-black">
           {result}
@@ -77,12 +77,12 @@ const SattaResultTable = ({ todayResults = [], yesterdayResults = [] }) => {
                   <td className="py-2 px-2 text-center font-bold text-white border h-full border-gray-800 bg-gradient2">
                     <p className="text-base text-white w-full lg:text-xl mt-1 text-center">
                       {game.displayName}{" "}
-                      <span className="max-[502px]:block">{game.time}</span>
                     </p>
+                      <span className="max-[502px]:block text-base">{game.time}</span>
                   </td>
                   {/* Yesterday Result Cell */}
                   <td className="text-center bg-white border !p-0 !m-0 !spacing-0 border-gray-800 yesterday-number">
-                    <div className="text-2xl font-bold tracking-widest text-black">
+                    <div className="text-lg lg:text-xl font-bold tracking-widest text-black">
                       {game.yesterdayResult}
                     </div>
                   </td>

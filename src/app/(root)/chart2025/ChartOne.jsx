@@ -2,10 +2,12 @@ import Link from "next/link";
 import { GAMES } from "@/utils/gameConfig";
 
 const ChartOne = () => {
+  const currentYear = new Date().getFullYear();
+
   const sattaLinks = GAMES.map((game) => ({
     id: game.order,
-    title: `${game.name} YEARLY CHART 2025`,
-    href: `${game.key}-yearly-chart-2025`,
+    title: `${game.name} YEARLY CHART ${currentYear}`,
+    href: `${game.key}-yearly-chart-${currentYear}`,
   }));
 
   return (
@@ -14,7 +16,7 @@ const ChartOne = () => {
         T1-satta provides all kind of satta king results everyday.
       </h1>
       <h2 className="capitalize text-3xl py-3 text-white font-semibold text-center">
-        T1 Satta Play Chart 2025
+        T1 Satta Play Chart {currentYear}
       </h2>
       <div className="bg-gradient h-full py-6">
         <div className="container mx-auto max-sm:px-3 px-4 py-5">
