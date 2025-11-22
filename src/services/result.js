@@ -4,6 +4,11 @@ import { GAMES } from "@/utils/gameConfig";
 // ==================== SETTINGS ====================
 export async function getSettings() {
   const query = `*[_type == "settings"][0]{
+    site1_name,
+    site1_contactName,
+    site1_whatsappNumber,
+    site1_paymentNumber,
+    site1_rate,
     site2_name,
     site2_contactName,
     site2_whatsappNumber,

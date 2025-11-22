@@ -35,7 +35,7 @@ export default async function Home() {
     paymentNumber: settings?.site1_paymentNumber || "",
     rate: settings?.site1_rate || "",
   };
-
+  console.log(siteConfig,settings, "siteConfig")
   return (
     <SattaDashboard
       todayResults={todayResults}

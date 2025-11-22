@@ -17,7 +17,7 @@ const GamePage = ({ data, setting, disawarData }) => {
     { name: "DISAWER ", time: "04:50 PM", number: "11" },
   ];
   const currentYear = new Date().getFullYear();
-
+  console.log(setting, "setting")
   return (
     <div className="min-h-screen bg-gray-100">
       {/* === TOP DYNAMIC SECTION === */}

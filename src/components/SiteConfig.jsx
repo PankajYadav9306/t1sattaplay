@@ -13,10 +13,10 @@ const SiteConfig = ({ showConfig, setShowConfig, onConfigSaved }) => {
     site1_rate: "",
 
     // Site 2 fields
-    site1_contactName: "",
-    site1_whatsappNumber: "",
-    site1_paymentNumber: "",
-    site1_rate: "",
+    site2_contactName: "",
+    site2_whatsappNumber: "",
+    site2_paymentNumber: "",
+    site2_rate: "",
 
     // Legacy fields for backward compatibility
     contactName: "",
@@ -45,10 +45,10 @@ const SiteConfig = ({ showConfig, setShowConfig, onConfigSaved }) => {
           site1_rate: config.site1_rate || "",
 
           // Site 2 fields
-          site1_contactName: config.site1_contactName || "",
-          site1_whatsappNumber: config.site1_whatsappNumber || "",
-          site1_paymentNumber: config.site1_paymentNumber || "",
-          site1_rate: config.site1_rate || "",
+          site2_contactName: config.site2_contactName || "",
+          site2_whatsappNumber: config.site2_whatsappNumber || "",
+          site2_paymentNumber: config.site2_paymentNumber || "",
+          site2_rate: config.site2_rate || "",
 
           // Legacy fields
           contactName: config.contactName || "",
@@ -67,7 +67,7 @@ const SiteConfig = ({ showConfig, setShowConfig, onConfigSaved }) => {
       const configToSave = {
         ...siteConfig,
         site1_name: "T1 SATTA",
-        site1_name: "T1 Satta Play",
+        site2_name: "T1 Satta Play",
       };
 
       await updateSettings(configToSave);
@@ -183,11 +183,11 @@ const SiteConfig = ({ showConfig, setShowConfig, onConfigSaved }) => {
               </label>
               <input
                 type="text"
-                value={siteConfig.site1_contactName || ""}
+                value={siteConfig.site2_contactName || ""}
                 onChange={(e) =>
                   setSiteConfig({
                     ...siteConfig,
-                    site1_contactName: e.target.value,
+                    site2_contactName: e.target.value,
                   })
                 }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-200"
@@ -201,11 +201,11 @@ const SiteConfig = ({ showConfig, setShowConfig, onConfigSaved }) => {
               </label>
               <input
                 type="number"
-                value={siteConfig.site1_whatsappNumber || ""}
+                value={siteConfig.site2_whatsappNumber || ""}
                 onChange={(e) =>
                   setSiteConfig({
                     ...siteConfig,
-                    site1_whatsappNumber: e.target.value,
+                    site2_whatsappNumber: e.target.value,
                   })
                 }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-200"
@@ -219,11 +219,11 @@ const SiteConfig = ({ showConfig, setShowConfig, onConfigSaved }) => {
               </label>
               <input
                 type="text"
-                value={siteConfig.site1_paymentNumber || ""}
+                value={siteConfig.site2_paymentNumber || ""}
                 onChange={(e) =>
                   setSiteConfig({
                     ...siteConfig,
-                    site1_paymentNumber: e.target.value,
+                    site2_paymentNumber: e.target.value,
                   })
                 }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-200"
@@ -237,9 +237,9 @@ const SiteConfig = ({ showConfig, setShowConfig, onConfigSaved }) => {
               </label>
               <input
                 type="number"
-                value={siteConfig.site1_rate || ""}
+                value={siteConfig.site2_rate || ""}
                 onChange={(e) =>
-                  setSiteConfig({ ...siteConfig, site1_rate: e.target.value })
+                  setSiteConfig({ ...siteConfig, site2_rate: e.target.value })
                 }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-200"
                 placeholder="e.g., 90"
