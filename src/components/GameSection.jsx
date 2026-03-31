@@ -4,7 +4,7 @@ import Link from "next/link";
 import DateTime from "./DateTime";
 
 const GamePage = ({ data, setting, disawarData }) => {
-  const schedule = [
+  const schedule = setting?.t1_khaiwalSection?.gameSchedule || [
     { name: "SHIRDI DHAM", time: "12:55 PM", number: "45" },
     { name: "KALIYAR", time: "01:55 PM", number: "62" },
     { name: "DELHI BAZAR", time: "03:00 PM", number: "27" },
@@ -89,7 +89,7 @@ const GamePage = ({ data, setting, disawarData }) => {
           <div className="flex-1 my-4 max-w-[1000px] mx-auto px-4 max-sm:px-2 pt-4 pb-6 text-base font-semibold leading-6 text-gray-900 min-h-1 bg-gradient">
             <div className="bg-white py-3 border-black border-dashed border-[1px]">
               <p className="uppercase mb-2 font-bold text-base lg:text-xl">
-                ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
+                ♕♕ &nbsp;{setting?.t1_contactName || setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
               </p>
               <div className="text-start mx-auto max-w-[400px]">
                 {schedule.map((game, index) => (
@@ -119,7 +119,7 @@ const GamePage = ({ data, setting, disawarData }) => {
             <p className="mt-5 text-white text-xl">💸 Payment Option 💸</p>
             <p className="text-white">
               PAYTM//BANK TRANSFER//PHONE PAY//GOOGLE PAY =&lt; ⏺️
-              {setting?.paymentNumber}⏺️
+              {setting?.t1_paymentNumber || setting?.paymentNumber}⏺️
               <br />
               ==========================
               <br />
@@ -128,12 +128,12 @@ const GamePage = ({ data, setting, disawarData }) => {
             <p className="text-white">
               🤑Rate list💸
               <br />
-              जोड़ी रेट 10-------{setting?.rate}
+              जोड़ी रेट 10-------{setting?.t1_rate || setting?.rate || "90"}
               <br />
-              हरूफ रेट 100-----{setting?.rate}
+              हरूफ रेट 100-----{setting?.t1_rate || setting?.rate || "90"}
             </p>
             <p className="uppercase text-white">
-              ♕♕ &nbsp;{setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
+              ♕♕ &nbsp;{setting?.t1_contactName || setting?.contactName} BHAI KHAIWAL &nbsp;♕♕
             </p>
             <p className="text-white max-sm:text-base">
               Game play करने के लिये नीचे लिंक पर क्लिक करे
@@ -141,7 +141,7 @@ const GamePage = ({ data, setting, disawarData }) => {
             <div className="mx-auto max-w-[300px] mt-4 hover:scale-110 transition-all duration-300">
               <Link
                 target="_blank"
-                href={`https://wa.me/+${setting?.whatsappNumber}`}
+                href={`https://wa.me/+${setting?.t1_whatsappNumber || setting?.whatsappNumber}`}
               >
                 <Image
                   className="max-sm:w-[200px] mx-auto max-sm:h-16"

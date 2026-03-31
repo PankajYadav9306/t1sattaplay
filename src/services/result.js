@@ -1,26 +1,16 @@
-import { client } from "@/lib/sanityClient";
 import { GAMES } from "@/utils/gameConfig";
+
+// API Base URL - use environment variable or default to current domain
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
 
 // ==================== SETTINGS ====================
 export async function getSettings() {
-  const query = `*[_type == "settings"][0]{
-    site1_name,
-    site1_contactName,
-    site1_whatsappNumber,
-    site1_paymentNumber,
-    site1_rate,
-    site2_name,
-    site2_contactName,
-    site2_whatsappNumber,
-    site2_paymentNumber,
-    site2_rate,
-    contactName,
-    whatsappNumber
-  }`;
-
   try {
-    const settings = await client.fetch(query);
-    return settings;
+    const response = await fetch(`${API_BASE}/api/settings`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch settings');
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error fetching settings:", error);
     return null;
@@ -44,19 +34,19 @@ function getISTDate(daysOffset = 0) {
 
 export async function updateSettings(settings) {
   try {
-    const existingSettings = await client.fetch(`*[_type == "settings"][0]`);
+    const response = await fetch(`${API_BASE}/api/settings`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(settings),
+    });
 
-    if (existingSettings) {
-      return await client
-        .patch(existingSettings._id)
-        .set(settings)
-        .commit();
-    } else {
-      return await client.create({
-        _type: 'settings',
-        ...settings
-      });
+    if (!response.ok) {
+      throw new Error('Failed to update settings');
     }
+
+    return await response.json();
   } catch (error) {
     console.error('Error updating settings:', error);
     throw error;
@@ -65,17 +55,14 @@ export async function updateSettings(settings) {
 
 // ==================== RESULTS QUERIES ====================
 export async function getTodayResult() {
-  const today = getISTDate(); // Use IST date
-  console.log('Fetching results for:', today); // Debug log
-  
-  const query = `*[_type == "result" && date == $today]{
-    game,
-    date,
-    resultNumber
-  }`;
-  
   try {
-    return await client.fetch(query, { today }, { cache: 'no-store' });
+    const response = await fetch(`${API_BASE}/api/results?type=today`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch today\'s results');
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error fetching today's results:", error);
     return [];
@@ -83,17 +70,14 @@ export async function getTodayResult() {
 }
 
 export async function getYesterdayResults() {
-  const yDate = getISTDate(-1); // Yesterday in IST
-  console.log('Fetching yesterday results for:', yDate);
-  
-  const query = `*[_type == "result" && date == $yDate]{
-    game,
-    date,
-    resultNumber
-  }`;
-  
   try {
-    return await client.fetch(query, { yDate }, { cache: 'no-store' });
+    const response = await fetch(`${API_BASE}/api/results?type=yesterday`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch yesterday\'s results');
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error fetching yesterday's results:", error);
     return [];
@@ -101,56 +85,44 @@ export async function getYesterdayResults() {
 }
 
 export async function getLastResult() {
-  const query = `*[_type == "result"] 
-    | order(_createdAt desc)[0] {
-      game,
-      date,
-      waitingGame,
-      resultNumber
-    }`;
-
   try {
-    return await client.fetch(query);
+    const response = await fetch(`${API_BASE}/api/results?type=last`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch last result');
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error fetching last result:", error);
     return null;
   }
 }
 
-
 export async function getDisawarData() {
-  const today = getISTDate();
-  const yDate = getISTDate(-1);
-  
-  console.log('Fetching Disawar data for:', { today, yDate }); // Debug
-  
-  const query = `{
-    "today": *[_type == "result" && game == "disawer" && date == $today][0].resultNumber,
-    "yesterday": *[_type == "result" && game == "disawer" && date == $yDate][0].resultNumber
-  }`;
-
   try {
-    const result = await client.fetch(query, { today, yDate }, { cache: 'no-store' });
-    console.log('Disawar result:', result); // Debug
-    return result;
+    const response = await fetch(`${API_BASE}/api/results?type=disawar`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch DISAWAR data');
+    }
+    return await response.json();
   } catch (error) {
-    console.error("Error fetching Disawar data:", error);
+    console.error("Error fetching DISAWAR data:", error);
     return { today: null, yesterday: null };
   }
 }
 
 export async function getMonthlyResults(month, year) {
-  const start = `${year}-${String(month).padStart(2, "0")}-01`;
-  const end = `${year}-${String(month).padStart(2, "0")}-31`;
-
-  const query = `*[_type == "result" && date >= $start && date <= $end]{
-    game,
-    resultNumber,
-    date
-  } | order(date asc)`;
-
   try {
-    return await client.fetch(query, { start, end }, { cache: 'no-store' });
+    const response = await fetch(`${API_BASE}/api/results?month=${month}&year=${year}`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch monthly results');
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error fetching monthly results:", error);
     return [];
@@ -158,22 +130,14 @@ export async function getMonthlyResults(month, year) {
 }
 
 export async function getYearlyResults(gameKey, year) {
-  const startDate = `${year}-01-01`;
-  const endDate = `${year}-12-31`;
-
-  const query = `*[_type == "result" && game == $game && date >= $startDate && date <= $endDate]{
-    game,
-    resultNumber,
-    date
-  } | order(date asc)`;
-
   try {
-    const results = await client.fetch(query, {
-      game: gameKey,
-      startDate,
-      endDate
+    const response = await fetch(`${API_BASE}/api/results?game=${gameKey}&year=${year}`, {
+      cache: 'no-store'
     });
-    return results;
+    if (!response.ok) {
+      throw new Error('Failed to fetch yearly results');
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error fetching yearly results:", error);
     return [];
@@ -182,37 +146,44 @@ export async function getYearlyResults(gameKey, year) {
 
 // ==================== ADMIN FUNCTIONS ====================
 export async function getAllResultsWithMeta() {
-  const query = `*[_type == "result"] 
-    | order(_createdAt desc) {
-      _id,
-      game,
-      date,
-      waitingGame,
-      resultNumber,
-      _createdAt,
-      _updatedAt
-    }`;
-
   try {
-    return await client.fetch(query);
+    const response = await fetch(`${API_BASE}/api/results`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch all results');
+    }
+    const results = await response.json();
+
+    // Add metadata
+    return results.map(result => ({
+      ...result,
+      _id: result._id,
+      gameName: GAMES.find(g => g.key === result.game)?.name || result.game,
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt
+    }));
   } catch (error) {
-    console.error("Error fetching all results with metadata:", error);
+    console.error("Error fetching all results:", error);
     return [];
   }
 }
 
 export async function createResult(data) {
   try {
-    const normalizedData = {
-      ...data,
-      game: data.game.toLowerCase().trim(),
-      waitingGame: data.waitingGame.toLowerCase().trim()
-    };
-
-    return await client.create({
-      _type: 'result',
-      ...normalizedData,
+    const response = await fetch(`${API_BASE}/api/results`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     });
+
+    if (!response.ok) {
+      throw new Error('Failed to create result');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error('Error creating result:', error);
     throw error;
@@ -221,10 +192,19 @@ export async function createResult(data) {
 
 export async function updateResult(id, data) {
   try {
-    return await client
-      .patch(id)
-      .set(data)
-      .commit();
+    const response = await fetch(`${API_BASE}/api/results/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update result');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error('Error updating result:', error);
     throw error;
@@ -233,7 +213,15 @@ export async function updateResult(id, data) {
 
 export async function deleteResult(id) {
   try {
-    return await client.delete(id);
+    const response = await fetch(`${API_BASE}/api/results/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete result');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error('Error deleting result:', error);
     throw error;
@@ -314,19 +302,15 @@ export function transformYearlyData(results) {
     JUL: {}, AUG: {}, SEP: {}, OCT: {}, NOV: {}, DEC: {}
   };
 
-  const monthNames = [
-    'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
-    'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
-  ];
-
   results.forEach(result => {
     const date = new Date(result.date);
-    const month = monthNames[date.getMonth()];
+    const monthName = date.toLocaleString('en-US', { month: 'short' }).toUpperCase();
     const day = date.getDate();
 
-    if (months[month]) {
-      months[month][day] = result.resultNumber;
+    if (months[monthName]) {
+      months[monthName][day] = result.resultNumber;
     }
   });
+
   return months;
 }
