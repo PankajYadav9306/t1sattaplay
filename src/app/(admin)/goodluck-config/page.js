@@ -10,7 +10,7 @@ const GoodluckConfigPage = () => {
 
     const handleConfigSaved = () => {
         // Optional: Add any post-save logic here
-        console.log("Good Luck configuration saved");
+        console.log("T1 configuration saved");
     };
 
     return (

@@ -17,6 +17,22 @@ const GamePage = ({ data, setting, disawarData }) => {
     { name: "DISAWER ", time: "04:50 PM", number: "11" },
   ];
   const currentYear = new Date().getFullYear();
+
+  // Function to get IST date
+  function getISTDate(daysOffset = 0) {
+    const now = new Date();
+    now.setDate(now.getDate() + daysOffset);
+    // Convert to IST (UTC+5:30)
+    const istOffset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds
+    const istTime = new Date(now.getTime() + istOffset);
+    return istTime.toISOString().split('T')[0]; // YYYY-MM-DD format
+  }
+
+  const yesterdayDate = getISTDate(-1);
+  const todayDate = getISTDate();
+  const yesterdayResult = disawarData?.find(r => r.date === yesterdayDate)?.resultNumber;
+  const todayResult = disawarData?.find(r => r.date === todayDate)?.resultNumber;
+
   console.log(setting, "setting")
   return (
     <div className="min-h-screen bg-gray-100">
@@ -56,7 +72,7 @@ const GamePage = ({ data, setting, disawarData }) => {
         <Link href={`/disawer-yearly-chart-${currentYear}`} className="text-3xl font-bold text-black mb-4">DISAWAR</Link>
         <div className="flex items-center gap-3 text-black justify-center max-w-[350px] mx-auto">
           <span className="text-xl font-semibold">
-            {disawarData?.yesterday || "--"}
+            {yesterdayResult || "--"}
           </span>
           <Image
             className="mx-4"
@@ -66,7 +82,7 @@ const GamePage = ({ data, setting, disawarData }) => {
             height={20}
           />
           <span className="text-xl text-black font-semibold">
-            {disawarData?.today || (
+            {todayResult || (
               <Image
                 className="inline"
                 alt="wait icon"

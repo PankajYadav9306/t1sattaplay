@@ -32,7 +32,7 @@ export default async function RootLayout({ children }) {
         />
       </Link>
       <p className="text-sm sm:text-base text-center font-semibold text-[#FF0000] py-2 bg-[#ffd800]">
-        @{currentYear} Good Luck Satta :: All Rights Reserved
+        @{currentYear} T1 Satta :: All Rights Reserved
       </p>
       <p className="max-w-[1140px] text-center mx-auto mt-4 px-3 pb-4 sm:text-base text-xs font-medium">
         !! DISCLAIMER :-{" "}
