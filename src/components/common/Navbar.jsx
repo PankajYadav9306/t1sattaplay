@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { getChartYearRangeLabel } from "@/utils/chartYears";
 
 const Navbar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScroll = useRef(0); // ✅ useRef instead of state
+  const chartYearRangeLabel = getChartYearRangeLabel();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +34,7 @@ const Navbar = () => {
 
   const sattaLinks = [
     { id: 1, title: "Home", href: "/" },
-    { id: 2, title: "Chart 2025", href: "/chart2025" },
+    { id: 2, title: `Charts ${chartYearRangeLabel}`, href: "/charts" },
     { id: 3, title: "Contact", href: "/contact" },
   ];
 

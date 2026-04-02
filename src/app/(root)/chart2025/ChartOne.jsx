@@ -1,14 +1,18 @@
 import Link from "next/link";
 import { GAMES } from "@/utils/gameConfig";
+import { getChartYearRangeLabel, getChartYears } from "@/utils/chartYears";
 
 const ChartOne = () => {
-  const currentYear = new Date().getFullYear();
+  const chartYears = getChartYears();
+  const yearRangeLabel = getChartYearRangeLabel();
 
-  const sattaLinks = GAMES.map((game) => ({
-    id: game.order,
-    title: `${game.name} YEARLY CHART ${currentYear}`,
-    href: `${game.key}-yearly-chart-${currentYear}`,
-  }));
+  const sattaLinks = GAMES.flatMap((game) =>
+    chartYears.map((year) => ({
+      id: `${game.order}-${year}`,
+      title: `${game.name} YEARLY CHART ${year}`,
+      href: `${game.key}-yearly-chart-${year}`,
+    }))
+  );
 
   return (
     <div className="mt-18 py-4 h-full bg-gradient">
@@ -16,7 +20,7 @@ const ChartOne = () => {
         T1-satta provides all kind of satta king results everyday.
       </h1>
       <h2 className="capitalize text-3xl py-3 text-white font-semibold text-center">
-        T1 Satta Play Chart {currentYear}
+        T1 Satta Play Chart {yearRangeLabel}
       </h2>
       <div className="bg-gradient h-full py-6">
         <div className="container mx-auto max-sm:px-3 px-4 py-5">

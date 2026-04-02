@@ -1,4 +1,5 @@
 import { GAMES } from "@/utils/gameConfig";
+import { getChartYears } from "@/utils/chartYears";
 
 // API Base URL - use environment variable or default to current domain
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
@@ -266,13 +267,14 @@ export function validateResultData(data) {
 }
 
 // ==================== CHART MAPPINGS ====================
+const chartYears = getChartYears();
+
 // Dynamic game slug mapping using GAMES config
 export const gameSlugMapping = {};
 GAMES.forEach(game => {
-  // 2024 versions
-  gameSlugMapping[`${game.key.replace('_', '-')}-yearly-chart-2024`] = game.key;
-  // 2025 versions
-  gameSlugMapping[`${game.key.replace('_', '-')}-yearly-chart-2025`] = game.key;
+  chartYears.forEach(year => {
+    gameSlugMapping[`${game.key.replace('_', '-')}-yearly-chart-${year}`] = game.key;
+  });
 });
 
 // Dynamic parse slug data function
@@ -280,16 +282,12 @@ export function parseSlugData(slug) {
   const gameDisplayNames = {};
 
   GAMES.forEach(game => {
-    // 2024 versions
-    gameDisplayNames[`${game.key.replace('_', '-')}-yearly-chart-2024`] = {
-      name: game.name,
-      year: "2024"
-    };
-    // 2025 versions
-    gameDisplayNames[`${game.key.replace('_', '-')}-yearly-chart-2025`] = {
-      name: game.name,
-      year: "2025"
-    };
+    chartYears.forEach(year => {
+      gameDisplayNames[`${game.key.replace('_', '-')}-yearly-chart-${year}`] = {
+        name: game.name,
+        year: String(year)
+      };
+    });
   });
 
   return gameDisplayNames[slug] || null;

@@ -2,6 +2,7 @@
 import { connectDB } from "@/lib/db";
 import Result from "@/models/Result";
 import { GAMES } from "@/utils/gameConfig";
+import { getChartYears } from "@/utils/chartYears";
 
 function getISTDate(daysOffset = 0) {
     const now = new Date();
@@ -104,8 +105,7 @@ export async function getYearlyResultsFromDB(gameKey, year) {
 }
 
 // ==================== CHART HELPERS ====================
-const currentYear = new Date().getFullYear();
-const years = [currentYear - 2, currentYear - 1, currentYear, currentYear + 1];
+const years = getChartYears();
 
 export const gameSlugMapping = {};
 GAMES.forEach(game => {

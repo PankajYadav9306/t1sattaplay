@@ -5,6 +5,7 @@ import { Eye, EyeOff, Shield, ArrowRight, Mail, AlertCircle } from 'lucide-react
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+  const currentYear = new Date().getFullYear();
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,11 +41,11 @@ const LoginPage = () => {
 
       if (response.ok) {
         setSuccess('Login successful! Redirecting...');
-        
+
         // Store auth data
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        
+
         // Redirect after short delay
         setTimeout(() => {
           router.push('/admin');
@@ -160,7 +161,7 @@ const LoginPage = () => {
           {/* Footer */}
           <div className="mt-6 text-center">
             <p className="text-white/50 text-xs">
-              © 2025 Admin Panel. All rights reserved.
+              © {currentYear} Admin Panel. All rights reserved.
             </p>
           </div>
         </div>

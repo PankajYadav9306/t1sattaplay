@@ -54,7 +54,7 @@ const GamePage = ({ data, setting, disawarData }) => {
 
               {/* ✅ Next game (WAITING) */}
 
-              <p className="text-[#fc6311]">
+              <p className="text-[#fc6311] text-2xl">
                 {data.waitingGame.replace("_", " ")}
               </p>
               <Image
